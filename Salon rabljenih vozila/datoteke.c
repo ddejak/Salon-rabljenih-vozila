@@ -10,7 +10,7 @@
 static int brojVozila = 0;
 
 
-void ispisVozila() {
+void ispisSvihVozila() {
 
 	FILE* fP = NULL;
 	fP = fopen("vozila.bin", "rb+");
@@ -40,22 +40,7 @@ void ispisVozila() {
 
 	for (i = 0; i < brojVozila; i++)
 {
-		printf("Vozilo:%d\nID:%d\nMarka vozila:%s\nModel vozila:%s\nKaroserija vozila:%s\nGodina proizvodnje:%s\nPrijedeni kilometri:%d km\nStanje:%s\nVrsta motora:%s\nObujam motora:%lf cm^3\nSnaga Motora:%d kW\nVrsta mjenjaca:%s\nBroj stupnjeva mjenjaca:%d\nBroj sasije:%s\n\n\n",
-			
-			i+1,
-			(temp+i)->redniBrUSustavu,
-			(temp + i)->markaVozila,
-			(temp + i)->nazivModelaVozila,
-			(temp + i)->karoserijaVozila,
-			(temp + i)->godinaProizvdnje,
-			(temp + i)->kilometraza,
-			(temp + i)->stanje,
-			(temp + i)->vrstaMotora,
-			(temp + i)->obujamMotora,
-			(temp + i)->snagaMotora,
-			(temp + i)->vrstaMjenjaca,
-			(temp + i)->stupnjeviPrijenosa,
-			(temp + i)->brojSasije);
+		ispis(temp, i);
 }
 
 
@@ -104,22 +89,7 @@ void pregledVozilaMarka() {
 		if (strcmp(marka, (temp + i)->markaVozila) == 0) {
 
 
-			printf("\nVozilo:%d\nID:%d\nMarka vozila:%s\nModel vozila:%s\nKaroserija vozila:%s\nGodina proizvodnje:%s\nPrijedeni kilometri:%d km\nStanje:%s\nVrsta motora:%s\nObujam motora:%lf cm^3\nSnaga Motora:%d kW\nVrsta mjenjaca:%s\nBroj stupnjeva mjenjaca:%d\nBroj sasije:%s\n\n\n",
-
-				i + 1,
-				(temp + i)->redniBrUSustavu,
-				(temp + i)->markaVozila,
-				(temp + i)->nazivModelaVozila,
-				(temp + i)->karoserijaVozila,
-				(temp + i)->godinaProizvdnje,
-				(temp + i)->kilometraza,
-				(temp + i)->stanje,
-				(temp + i)->vrstaMotora,
-				(temp + i)->obujamMotora,
-				(temp + i)->snagaMotora,
-				(temp + i)->vrstaMjenjaca,
-				(temp + i)->stupnjeviPrijenosa,
-				(temp + i)->brojSasije);
+			ispis(temp, i);
 		}
 
 
@@ -167,22 +137,7 @@ void PregledVozilaKaroserija() {
 		if (strcmp(karoserija, (temp + i)->karoserijaVozila) == 0) {
 
 
-			printf("\nVozilo:%d\nID:%d\nMarka vozila:%s\nModel vozila:%s\nKaroserija vozila:%s\nGodina proizvodnje:%s\nPrijedeni kilometri:%d km\nStanje:%s\nVrsta motora:%s\nObujam motora:%lf cm^3\nSnaga Motora:%d kW\nVrsta mjenjaca:%s\nBroj stupnjeva mjenjaca:%d\nBroj sasije:%s\n\n\n",
-
-				i + 1,
-				(temp + i)->redniBrUSustavu,
-				(temp + i)->markaVozila,
-				(temp + i)->nazivModelaVozila,
-				(temp + i)->karoserijaVozila,
-				(temp + i)->godinaProizvdnje,
-				(temp + i)->kilometraza,
-				(temp + i)->stanje,
-				(temp + i)->vrstaMotora,
-				(temp + i)->obujamMotora,
-				(temp + i)->snagaMotora,
-				(temp + i)->vrstaMjenjaca,
-				(temp + i)->stupnjeviPrijenosa,
-				(temp + i)->brojSasije);
+			ispis(temp, i);
 		}
 
 
@@ -199,76 +154,56 @@ void PregledVozilaKaroserija() {
 }
 
 
-//void PregledVozilaGodine() {
-//
-//	FILE* fP = NULL;
-//	fP = fopen("vozila.bin", "rb+");
-//	if (fP == NULL) {
-//		perror("Greska kod funkcije ispisVozila.");
-//		exit(EXIT_FAILURE);
-//	}
-//	fread(&brojVozila, sizeof(int), 1, fP);
-//	//printf("Broj vozila na stanju je: %d\n\n", brojVozila);
-//	VOZILO* temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
-//
-//	if (temp == NULL) {
-//		perror("Zauzimanje memorije za vozila");
-//		exit(EXIT_FAILURE);
-//	}
-//
-//	fread(temp, sizeof(VOZILO), brojVozila, fP);
-//
-//
-//
-//	if (temp == NULL) {
-//		printf("Polje vozila je prazno!\n");
-//		return;
-//	}
-//
-//	int godinaDG;
-//	int godinaGG;
-//	int i;
-//	printf("Unesite donju granicu raspon godina proizvodnje koji trazite:");
-//	scanf("%d", godinaDG);
-//	printf("Unesite donju granicu raspon godina proizvodnje koji trazite:");
-//	scanf("%d", godinaDG);
-//
-//	for (i = 0; i < brojVozila; i++) {
-//		if ((godinaDG <= ((temp+i)->godinaProizvdnje)) && (godinaGG >= ((temp+i)->godinaProizvdnje)) {
-//
-//
-//			printf("\nVozilo:%d\nID:%d\nMarka vozila:%s\nModel vozila:%s\nKaroserija vozila:%s\nGodina proizvodnje:%s\nPrijedeni kilometri:%d km\nStanje:%s\nVrsta motora:%s\nObujam motora:%lf cm^3\nSnaga Motora:%d kW\nVrsta mjenjaca:%s\nBroj stupnjeva mjenjaca:%d\nBroj sasije:%s\n\n\n",
-//
-//				i + 1,
-//				(temp + i)->redniBrUSustavu,
-//				(temp + i)->markaVozila,
-//				(temp + i)->nazivModelaVozila,
-//				(temp + i)->karoserijaVozila,
-//				(temp + i)->godinaProizvdnje,
-//				(temp + i)->kilometraza,
-//				(temp + i)->stanje,
-//				(temp + i)->vrstaMotora,
-//				(temp + i)->obujamMotora,
-//				(temp + i)->snagaMotora,
-//				(temp + i)->vrstaMjenjaca,
-//				(temp + i)->stupnjeviPrijenosa,
-//				(temp + i)->brojSasije);
-//		}
-//
-//
-//
-//	}
-//
-//	free(temp);
-//
-//
-//	return;
-//
-//
-//
-//
-//
-//}
+void PregledVozilaGodine() {
+	FILE* fP = NULL;
+	fP = fopen("vozila.bin", "rb+");
+	if (fP == NULL) {
+		perror("Greska kod funkcije ispisVozila.");
+		exit(EXIT_FAILURE);
+	}
+	fread(&brojVozila, sizeof(int), 1, fP);
+	//printf("Broj vozila na stanju je: %d\n\n", brojVozila);
+	VOZILO* temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
+
+	if (temp == NULL) {
+		perror("Zauzimanje memorije za vozila");
+		exit(EXIT_FAILURE);
+	}
+
+	fread(temp, sizeof(VOZILO), brojVozila, fP);
+
+
+
+	if (temp == NULL) {
+		printf("Polje vozila je prazno!\n");
+		return;
+	}
+
+	int godinaDG;
+	int godinaGG;
+	int i;
+	printf("Unesite donju granicu raspon godine koju trazite:");
+	scanf("%d", &godinaDG);
+	printf("Unesite donju granicu raspon godine koju trazite:");
+	scanf("%d", &godinaGG);
+
+	for (i = 0; i < brojVozila; i++) {
+		if ((godinaDG <= ((temp + i)->godinaProizvdnje)) && (godinaGG >= ((temp + i)->godinaProizvdnje))) {
+
+
+			ispis(temp, i);
+		}
+
+
+	}
+
+	free(temp);
+
+
+	return;
+
+
+}
 
 
 
@@ -312,22 +247,7 @@ void PregledVozilaKilometri() {
 		if ((kilometrazaDG <= ((temp+i)->kilometraza)) && (kilometrazaGG >= ((temp+i)->kilometraza))) {
 
 
-			printf("\nVozilo:%d\nID:%d\nMarka vozila:%s\nModel vozila:%s\nKaroserija vozila:%s\nGodina proizvodnje:%s\nPrijedeni kilometri:%d km\nStanje:%s\nVrsta motora:%s\nObujam motora:%lf cm^3\nSnaga Motora:%d kW\nVrsta mjenjaca:%s\nBroj stupnjeva mjenjaca:%d\nBroj sasije:%s\n\n\n",
-
-				i + 1,
-				(temp + i)->redniBrUSustavu,
-				(temp + i)->markaVozila,
-				(temp + i)->nazivModelaVozila,
-				(temp + i)->karoserijaVozila,
-				(temp + i)->godinaProizvdnje,
-				(temp + i)->kilometraza,
-				(temp + i)->stanje,
-				(temp + i)->vrstaMotora,
-				(temp + i)->obujamMotora,
-				(temp + i)->snagaMotora,
-				(temp + i)->vrstaMjenjaca,
-				(temp + i)->stupnjeviPrijenosa,
-				(temp + i)->brojSasije);
+			ispis(temp, i);
 		}
 
 
@@ -381,22 +301,7 @@ void PregledVozilaSnaga() {
 		if ((snagaDG <= ((temp + i)->snagaMotora)) && (snagaGG >= ((temp + i)->snagaMotora))) {
 
 
-			printf("\nVozilo:%d\nID:%d\nMarka vozila:%s\nModel vozila:%s\nKaroserija vozila:%s\nGodina proizvodnje:%s\nPrijedeni kilometri:%d km\nStanje:%s\nVrsta motora:%s\nObujam motora:%lf cm^3\nSnaga Motora:%d kW\nVrsta mjenjaca:%s\nBroj stupnjeva mjenjaca:%d\nBroj sasije:%s\n\n\n",
-
-				i + 1,
-				(temp + i)->redniBrUSustavu,
-				(temp + i)->markaVozila,
-				(temp + i)->nazivModelaVozila,
-				(temp + i)->karoserijaVozila,
-				(temp + i)->godinaProizvdnje,
-				(temp + i)->kilometraza,
-				(temp + i)->stanje,
-				(temp + i)->vrstaMotora,
-				(temp + i)->obujamMotora,
-				(temp + i)->snagaMotora,
-				(temp + i)->vrstaMjenjaca,
-				(temp + i)->stupnjeviPrijenosa,
-				(temp + i)->brojSasije);
+			ispis(temp, i);
 		}
 
 
@@ -445,22 +350,7 @@ void PregledVozilaMotor() {
 		if (strcmp(motor, (temp + i)->vrstaMotora) == 0) {
 
 
-			printf("\nVozilo:%d\nID:%d\nMarka vozila:%s\nModel vozila:%s\nKaroserija vozila:%s\nGodina proizvodnje:%s\nPrijedeni kilometri:%d km\nStanje:%s\nVrsta motora:%s\nObujam motora:%lf cm^3\nSnaga Motora:%d kW\nVrsta mjenjaca:%s\nBroj stupnjeva mjenjaca:%d\nBroj sasije:%s\n\n\n",
-
-				i + 1,
-				(temp + i)->redniBrUSustavu,
-				(temp + i)->markaVozila,
-				(temp + i)->nazivModelaVozila,
-				(temp + i)->karoserijaVozila,
-				(temp + i)->godinaProizvdnje,
-				(temp + i)->kilometraza,
-				(temp + i)->stanje,
-				(temp + i)->vrstaMotora,
-				(temp + i)->obujamMotora,
-				(temp + i)->snagaMotora,
-				(temp + i)->vrstaMjenjaca,
-				(temp + i)->stupnjeviPrijenosa,
-				(temp + i)->brojSasije);
+			ispis(temp, i);
 		}
 
 
@@ -509,22 +399,7 @@ void PregledVozilaMjenjac() {
 		if (strcmp(mjenjac, (temp + i)->vrstaMjenjaca) == 0) {
 
 
-			printf("\nVozilo:%d\nID:%d\nMarka vozila:%s\nModel vozila:%s\nKaroserija vozila:%s\nGodina proizvodnje:%s\nPrijedeni kilometri:%d km\nStanje:%s\nVrsta motora:%s\nObujam motora:%lf cm^3\nSnaga Motora:%d kW\nVrsta mjenjaca:%s\nBroj stupnjeva mjenjaca:%d\nBroj sasije:%s\n\n\n",
-
-				i + 1,
-				(temp + i)->redniBrUSustavu,
-				(temp + i)->markaVozila,
-				(temp + i)->nazivModelaVozila,
-				(temp + i)->karoserijaVozila,
-				(temp + i)->godinaProizvdnje,
-				(temp + i)->kilometraza,
-				(temp + i)->stanje,
-				(temp + i)->vrstaMotora,
-				(temp + i)->obujamMotora,
-				(temp + i)->snagaMotora,
-				(temp + i)->vrstaMjenjaca,
-				(temp + i)->stupnjeviPrijenosa,
-				(temp + i)->brojSasije);
+			ispis(temp, i);
 		}
 
 
@@ -576,10 +451,9 @@ void unosNovogVozila() {
 	getchar();
 	scanf("%19[^\n]", temp.karoserijaVozila);
 	printf("Unesite godinu proizvodnje:");
-	getchar();
-	scanf("%19[^\n]", temp.godinaProizvdnje);
-	getchar();
+	scanf("%d", &temp.godinaProizvdnje);
 	printf("Unesite stanje vozila:");
+	getchar();
 	scanf("%19[^\n]", temp.stanje);
 	printf("Unesite broj sasije:");
 	getchar();
@@ -610,13 +484,6 @@ void unosNovogVozila() {
 
 }
 
-
-
-
-
-
-
-
 void pregledVozila() {
 
 	int uvjet;
@@ -624,7 +491,7 @@ void pregledVozila() {
 	while (1) {
 
 		system("cls");
-		printf("\tDobrodosli u izbornik za pregled vozila\n");
+		printf("\t\t\tDobrodosli u izbornik za pregled vozila\n");
 		printf("==================================================================================================\n");
 		printf("\t\t\t1.Pregled svih vozila.\n\
                 \t2.Pregled vozila unosom marke vozila.\n\
@@ -638,22 +505,24 @@ void pregledVozila() {
 		printf("==================================================================================================\n");
 
 		printf("Odaberit radnju koju zelite:");
-		scanf("%d", &uvjet);
+		if (scanf("%d", &uvjet) != 1) {
+			printf("\nNeispravan unos. Molimo unesite broj.\n");
+			while (getchar() != '\n');
+			continue;
+		}
 
 		switch (uvjet) {
 
-		case 1:ispisVozila(); break;
+		case 1:ispisSvihVozila(); break;
 		case 2:pregledVozilaMarka(); break;
 		case 3:PregledVozilaKaroserija();  break;
-		case 4:/*PregledVozilaGodine();*/  break;
+		case 4:PregledVozilaGodine();  break;
 		case 5:PregledVozilaSnaga(); break;
 		case 6:PregledVozilaKilometri();  break;
 		case 7:PregledVozilaMotor(); break;
 		case 8:PregledVozilaMjenjac();  break;
 		case 9:return;
-		default: 
-			printf("Krivi unos.\n"); 
-			break;
+		default: printf("Krivi unos.\n"); break;
 
 
 

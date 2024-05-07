@@ -1,14 +1,14 @@
 #pragma once
 #include "strukture.h"
 
-
+void ispis(VOZILO*, int);
 void unosNovogVozila();
 void pregledVozila();
-void ispisVozila(const VOZILO* const, int);
+void ispisSvihVozila(const VOZILO* const, int);
 void pregledVozilaMarka();
 void PregledVozilaKaroserija();
 void PregledVozilaMotor();
 void PregledVozilaMjenjac();
-//void PregledVozilaGodine();
+void PregledVozilaGodine();
 void PregledVozilaKilometri();
 void PregledVozilaSnaga();

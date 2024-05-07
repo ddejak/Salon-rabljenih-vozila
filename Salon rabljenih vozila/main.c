@@ -14,22 +14,30 @@ int main(void) {
 	int izvrsi;
 
 	//Izbornik
+	
 	while (1) {
 
-		system("cls");
 
+		system("cls");
 		printf("===================================================================================================\n");
 		printf("\t\t\t\t1.Pregled dostupnih vozila.\n\
                 \t\t2.Unos novog vozila.\n\
                 \t\t3.Briasnje vozila.\n\
                 \t\t4.Ugasite program.\n");
 		printf("===================================================================================================\n");
-		
-		printf("\n\nUnesite sto zelite uciniti:");
-		scanf("%d", &izvrsi);
+
+			printf("\n\nUnesite sto zelite uciniti:");
+			if (scanf("%d", &izvrsi) != 1) {
+				printf("\nNeispravan unos. Molimo unesite broj.\n");
+				while (getchar() != '\n');
+				continue; 
+			}
+			
+	
+			
 
 		
-
+		
 		switch (izvrsi) {
 			
 
@@ -42,9 +50,9 @@ int main(void) {
 		case 4:printf("\nProgram se ugasio.\nWOMP WOMP"); exit(EXIT_SUCCESS);
 
 		default:printf("\nKrivi unos.\n"); break;
-		}
+		}system("pause");
 
-		system("pause");
+		
 
 	}
 
