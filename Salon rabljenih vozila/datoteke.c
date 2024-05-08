@@ -45,7 +45,7 @@ void ispisSvihVozila() {
 
 
 	free(temp);
-
+	fclose(fP);
 
 	return;
 
@@ -97,7 +97,7 @@ void pregledVozilaMarka() {
 	}
 
 	free(temp);
-
+	fclose(fP);
 
 	return;
 }
@@ -145,7 +145,7 @@ void PregledVozilaKaroserija() {
 	}
 
 	free(temp);
-
+	fclose(fP);
 
 	return;
 
@@ -198,7 +198,7 @@ void PregledVozilaGodine() {
 	}
 
 	free(temp);
-
+	fclose(fP);
 
 	return;
 
@@ -255,7 +255,7 @@ void PregledVozilaKilometri() {
 	}
 
 	free(temp);
-
+	fclose(fP);
 
 	return;
 
@@ -309,7 +309,7 @@ void PregledVozilaSnaga() {
 	}
 
 	free(temp);
-
+	fclose(fP);
 
 	return;
 
@@ -358,7 +358,7 @@ void PregledVozilaMotor() {
 	}
 
 	free(temp);
-
+	fclose(fP);
 
 	return;
 
@@ -398,15 +398,13 @@ void PregledVozilaMjenjac() {
 	for (i = 0; i < brojVozila; i++) {
 		if (strcmp(mjenjac, (temp + i)->vrstaMjenjaca) == 0) {
 
-
 			ispis(temp, i);
 		}
-
-
 
 	}
 
 	free(temp);
+	fclose(fP);
 
 
 	return;
@@ -425,6 +423,7 @@ void unosNovogVozila() {
 		return;
 	}
 
+	
 	printf("\nUnos novog vozila\n");
 
 	FILE* fP = NULL;
@@ -481,7 +480,7 @@ void unosNovogVozila() {
 	brojVozila++;
 	fwrite(&brojVozila, sizeof(int), 1, fP);
 	fclose(fP);
-
+	
 }
 
 
@@ -495,6 +494,8 @@ void azuriranjeVozila(){
 		return;
 	}
 
+	
+
 	FILE* fP = NULL;
 	fP = fopen("vozila.bin", "rb+");
 	if (fP == NULL) {
@@ -506,6 +507,13 @@ void azuriranjeVozila(){
 	}
 
 	fread(&brojVozila, sizeof(int), 1, fP);
+
+	if (brojVozila == 0) {
+		printf("Nema unesenih vozila, ne mozete koristiti funkciju azuriranje vozila.\n");
+		return;
+	}
+
+
 	VOZILO* temp = NULL;
 	temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
 	fread(temp, sizeof(VOZILO), brojVozila, fP);
@@ -565,6 +573,7 @@ void azuriranjeVozila(){
 
 	fseek(fP, sizeof(int) + sizeof(VOZILO) * id, SEEK_SET);
 	fwrite(&temp[id], sizeof(VOZILO), 1, fP);
+	free(temp);
 	fclose(fP);
 
 }
@@ -580,6 +589,7 @@ void brisanjeVozila() {
 		printf("Kriva lozinka, nemate pristup unosu novih vozila.\n");
 		return;
 	}
+	
 
 	FILE* fP = NULL;
 	fP = fopen("vozila.bin", "rb+");
@@ -592,6 +602,13 @@ void brisanjeVozila() {
 	}
 
 	fread(&brojVozila, sizeof(int), 1, fP);
+
+	if (brojVozila == 0) {
+		printf("Nema unesenih vozila, ne mozete koristiti funkciju brisanje vozila.\n");
+		return;
+	}
+
+
 	VOZILO* temp = NULL;
 	temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
 	fread(temp, sizeof(VOZILO), brojVozila, fP);
@@ -657,6 +674,23 @@ void brisanjeVozila() {
 void pregledVozila() {
 
 	int uvjet;
+
+	FILE* fP = NULL;
+	fP = fopen("vozila.bin", "rb+");
+	if (fP == NULL) {
+		fP = fopen("vozila.bin", "wb+");
+	}
+	if (fP == NULL) {
+		perror("Greska kod funkcije unosNovogVozila.");
+		exit(EXIT_FAILURE);
+	}
+
+	fread(&brojVozila, sizeof(int), 1, fP);
+
+	if (brojVozila == 0) {
+		printf("Nema unesenih vozila, kako bi mogli koristiti ovu funkciju prvo morate unjeti vozilo.\n");
+		return;
+	}
 
 	while (1) {
 
