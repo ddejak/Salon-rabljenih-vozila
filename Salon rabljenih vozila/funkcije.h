@@ -12,3 +12,5 @@ void PregledVozilaMjenjac();
 void PregledVozilaGodine();
 void PregledVozilaKilometri();
 void PregledVozilaSnaga();
+void brisanjeVozila();
+void azuriranjeVozila();

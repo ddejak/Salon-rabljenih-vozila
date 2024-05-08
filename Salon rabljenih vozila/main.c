@@ -22,11 +22,12 @@ int main(void) {
 		printf("===================================================================================================\n");
 		printf("\t\t\t\t1.Pregled dostupnih vozila.\n\
                 \t\t2.Unos novog vozila.\n\
-                \t\t3.Briasnje vozila.\n\
-                \t\t4.Ugasite program.\n");
+                \t\t3.Azuriranje vozila.\n\
+                \t\t4.Briasnje vozila.\n\
+                \t\t5.Ugasite program.\n");
 		printf("===================================================================================================\n");
 
-			printf("\n\nUnesite sto zelite uciniti:");
+			printf("\nUnesite sto zelite uciniti:");
 			if (scanf("%d", &izvrsi) != 1) {
 				printf("\nNeispravan unos. Molimo unesite broj.\n");
 				while (getchar() != '\n');
@@ -34,10 +35,6 @@ int main(void) {
 			}
 			
 	
-			
-
-		
-		
 		switch (izvrsi) {
 			
 
@@ -45,9 +42,11 @@ int main(void) {
 
 		case 2:unosNovogVozila();break;
 
-		case 3:printf("\nBrisanje vozila iz baze.\n"); break;
+		case 3:azuriranjeVozila(); break;
 
-		case 4:printf("\nProgram se ugasio.\nWOMP WOMP"); exit(EXIT_SUCCESS);
+		case 4:brisanjeVozila(); break;
+
+		case 5:printf("\nProgram se ugasio.\nWOMP WOMP"); exit(EXIT_SUCCESS);
 
 		default:printf("\nKrivi unos.\n"); break;
 		}system("pause");
