@@ -488,8 +488,6 @@ void unosNovogVozila() {
 void azuriranjeVozila(){
 	int pin;
 	int id;
-	char provjera;
-	int i;
 	printf("Unesite administratorski pin:");
 	scanf("%d", &pin);
 	if (pin != 3009) {
