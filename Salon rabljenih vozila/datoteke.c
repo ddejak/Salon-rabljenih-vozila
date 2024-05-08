@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <ctype.h>
 #include "funkcije.h"
 #include "strukture.h"
 
@@ -63,7 +64,6 @@ void pregledVozilaMarka() {
 		exit(EXIT_FAILURE);
 	}
 	fread(&brojVozila, sizeof(int), 1, fP);
-	//printf("Broj vozila na stanju je: %d\n\n", brojVozila);
 	VOZILO* temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
 
 	if (temp == NULL) {
@@ -82,6 +82,7 @@ void pregledVozilaMarka() {
 
 	char marka[20] = { 0 };
 	int i;
+	int brojac = 0;
 	printf("Unesite marku vozila koju zelite pronaci:");
 	scanf("%s", marka);
 
@@ -90,10 +91,15 @@ void pregledVozilaMarka() {
 
 
 			ispis(temp, i);
+			brojac++;
 		}
 
 
 
+	}
+	
+	if (brojac == 0) {
+		printf("\nVozila marke %s nemamo na stanju.\n", marka);
 	}
 
 	free(temp);
@@ -111,7 +117,6 @@ void PregledVozilaKaroserija() {
 		exit(EXIT_FAILURE);
 	}
 	fread(&brojVozila, sizeof(int), 1, fP);
-	//printf("Broj vozila na stanju je: %d\n\n", brojVozila);
 	VOZILO* temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
 
 	if (temp == NULL) {
@@ -130,18 +135,23 @@ void PregledVozilaKaroserija() {
 
 	char karoserija[20] = { 0 };
 	int i;
+	int brojac = 0;
 	printf("Unesite karoseriju vozila koju zelite pronaci:");
 	scanf("%s", karoserija);
 
 	for (i = 0; i < brojVozila; i++) {
 		if (strcmp(karoserija, (temp + i)->karoserijaVozila) == 0) {
 
-
+			
 			ispis(temp, i);
+			brojac++;
 		}
 
 
 
+	}
+	if (brojac == 0) {
+		printf("\nVozila oblika karoserije %s nemamo na stanju.\n", karoserija);
 	}
 
 	free(temp);
@@ -182,6 +192,7 @@ void PregledVozilaGodine() {
 	int godinaDG;
 	int godinaGG;
 	int i;
+	int brojac = 0;
 	printf("Unesite donju granicu raspon godine koju trazite:");
 	scanf("%d", &godinaDG);
 	printf("Unesite donju granicu raspon godine koju trazite:");
@@ -192,9 +203,14 @@ void PregledVozilaGodine() {
 
 
 			ispis(temp, i);
+			brojac++;
 		}
 
 
+	}
+
+	if (brojac == 0) {
+		printf("\nVozila u rasponu godina %d-%d nemamo na stanju.\n",godinaDG,godinaGG);
 	}
 
 	free(temp);
@@ -238,6 +254,7 @@ void PregledVozilaKilometri() {
 	int kilometrazaDG;
 	int kilometrazaGG;
 	int i;
+	int brojac = 0;
 	printf("Unesite donju granicu raspon kilometraze koji trazite:");
 	scanf("%d", &kilometrazaDG);
 	printf("Unesite donju granicu raspon kilometraze koji trazite:");
@@ -248,10 +265,15 @@ void PregledVozilaKilometri() {
 
 
 			ispis(temp, i);
+			brojac++;
 		}
 
 
 
+	}
+
+	if (brojac == 0) {
+		printf("\nVozila u rasponu kilometraze %d km-%d km nemamo na stanju.\n", kilometrazaDG, kilometrazaGG);
 	}
 
 	free(temp);
@@ -292,6 +314,7 @@ void PregledVozilaSnaga() {
 	int snagaDG;
 	int snagaGG;
 	int i;
+	int brojac = 0;
 	printf("Unesite donju granicu snage motora u KW koji trazite:");
 	scanf("%d", &snagaDG);
 	printf("Unesite donju granicu snage motora u KW  koji trazite:");
@@ -302,10 +325,15 @@ void PregledVozilaSnaga() {
 
 
 			ispis(temp, i);
+			brojac++;
 		}
 
 
 
+	}
+
+	if (brojac == 0) {
+		printf("\nVozila u rasponu snage %d kW-%d kW nemamo na stanju.\n", snagaDG, snagaGG);
 	}
 
 	free(temp);
@@ -343,6 +371,7 @@ void PregledVozilaMotor() {
 
 	char motor[20] = { 0 };
 	int i;
+	int brojac = 0;
 	printf("Unesite vrstu motora vozila koju zelite pronaci:");
 	scanf("%s", motor);
 
@@ -351,10 +380,15 @@ void PregledVozilaMotor() {
 
 
 			ispis(temp, i);
+			brojac++;
 		}
 
 
 
+	}
+
+	if (brojac == 0) {
+		printf("\nVozila s motorom %s nemamo.\n",motor);
 	}
 
 	free(temp);
@@ -392,6 +426,7 @@ void PregledVozilaMjenjac() {
 
 	char mjenjac[20] = { 0 };
 	int i;
+	int brojac = 0;
 	printf("Unesite vrstu mjenjaca vozila koju zelite pronaci:");
 	scanf("%s", mjenjac);
 
@@ -399,8 +434,13 @@ void PregledVozilaMjenjac() {
 		if (strcmp(mjenjac, (temp + i)->vrstaMjenjaca) == 0) {
 
 			ispis(temp, i);
+			brojac++;
 		}
 
+	}
+
+	if (brojac == 0) {
+		printf("\nVozila s mjenjacem %s nemamo.\n", mjenjac);
 	}
 
 	free(temp);
@@ -410,6 +450,66 @@ void PregledVozilaMjenjac() {
 	return;
 
 
+
+}
+
+
+void PregledVozilaCijena() {
+
+
+
+	FILE* fP = NULL;
+	fP = fopen("vozila.bin", "rb+");
+	if (fP == NULL) {
+		perror("Greska kod funkcije ispisVozila.");
+		exit(EXIT_FAILURE);
+	}
+	fread(&brojVozila, sizeof(int), 1, fP);
+	VOZILO* temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
+
+	if (temp == NULL) {
+		perror("Zauzimanje memorije za vozila");
+		exit(EXIT_FAILURE);
+	}
+
+	fread(temp, sizeof(VOZILO), brojVozila, fP);
+
+
+
+	if (temp == NULL) {
+		printf("Polje vozila je prazno!\n");
+		return;
+	}
+
+	double cijenaDG;
+	double cijenaGG;
+	int i;
+	int brojac = 0;
+	printf("Unesite donju granicu raspon cijene koji trazite:");
+	scanf("%lf", &cijenaDG);
+	printf("Unesite donju granicu raspon cijene koji trazite:");
+	scanf("%lf", &cijenaGG);
+
+	for (i = 0; i < brojVozila; i++) {
+		if ((cijenaDG <= ((temp + i)->cijena)) && (cijenaGG >= ((temp + i)->cijena))) {
+
+
+			ispis(temp, i);
+			brojac++;
+		}
+
+
+
+	}
+
+	if (brojac == 0) {
+		printf("\nVozila u rasponu cijene %.0lf eura-%.0lf eura nemamo na stanju.\n", cijenaDG, cijenaGG);
+	}
+
+	free(temp);
+	fclose(fP);
+
+	return;
 
 }
 
@@ -472,6 +572,8 @@ void unosNovogVozila() {
 	scanf("%lf", &temp.obujamMotora);
 	printf("Unesite snagu motora u kW:");
 	scanf("%d", &temp.snagaMotora);
+	printf("Unesite cijenu vozila u eurima:");
+	scanf("%lf", &temp.cijena);
 	
 	
 	fseek(fP, sizeof(int) + sizeof(VOZILO) * brojVozila, SEEK_SET);
@@ -569,6 +671,8 @@ void azuriranjeVozila(){
 	scanf("%lf", &(temp + id)->obujamMotora);
 	printf("Unesite snagu motora u kW:");
 	scanf("%d", &(temp + id)->snagaMotora);
+	printf("Unesite cijenu vozila u €:");
+	scanf("%lf", &(temp+id)->cijena);
 
 
 	fseek(fP, sizeof(int) + sizeof(VOZILO) * id, SEEK_SET);
@@ -703,9 +807,10 @@ void pregledVozila() {
                 \t4.Pregled vozila unosom raspona godini proizvodnje.\n\
                 \t5.Pregled vozila unosom raspona snage u kW.\n\
                 \t6.Pregled vozila unosom raspona kilometara u km.\n\
-                \t7.Pregled vozila po tipu motora\n\
-                \t8.Pregled vozila po tipu mjenjaca\n\
-                \t9.Vrati se u glavni izbornik\n");
+                \t7.Pregled vozila po tipu motora.\n\
+                \t8.Pregled vozila po tipu mjenjaca.\n\
+                \t9.Pregled Vozila po rasponu cijene.\n\
+                \t10.Vracanje u glavni izbornik\n");
 		printf("==================================================================================================\n");
 
 		printf("Odaberit radnju koju zelite:");
@@ -725,7 +830,8 @@ void pregledVozila() {
 		case 6:PregledVozilaKilometri();  break;
 		case 7:PregledVozilaMotor(); break;
 		case 8:PregledVozilaMjenjac();  break;
-		case 9:return;
+		case 9:PregledVozilaCijena(); break;
+		case 10:return;
 		default: printf("Krivi unos.\n"); break;
 
 

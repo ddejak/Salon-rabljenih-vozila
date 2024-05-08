@@ -7,7 +7,7 @@
 
 void ispis(VOZILO* temp, int i) {
 
-	printf("Vozilo:%d\nID:%d\nMarka vozila:%s\nModel vozila:%s\nKaroserija vozila:%s\nGodina proizvodnje:%d\nPrijedeni kilometri:%d km\nStanje:%s\nVrsta motora:%s\nObujam motora:%.2lf cm^3\nSnaga Motora:%d kW\nVrsta mjenjaca:%s\nBroj stupnjeva mjenjaca:%d\nBroj sasije:%s\n\n\n",
+	printf("Vozilo:%d\nID:%d\nMarka vozila:%s\nModel vozila:%s\nKaroserija vozila:%s\nGodina proizvodnje:%d\nPrijedeni kilometri:%d km\nStanje:%s\nVrsta motora:%s\nObujam motora:%.2lf cm^3\nSnaga Motora:%d kW\nVrsta mjenjaca:%s\nBroj stupnjeva mjenjaca:%d\nBroj sasije:%s\nCijena iznosi:%.2lf eura\n\n\n",
 
 		i + 1,
 		(temp + i)->redniBrUSustavu,
@@ -22,7 +22,9 @@ void ispis(VOZILO* temp, int i) {
 		(temp + i)->snagaMotora,
 		(temp + i)->vrstaMjenjaca,
 		(temp + i)->stupnjeviPrijenosa,
-		(temp + i)->brojSasije);
+		(temp + i)->brojSasije,
+		(temp + i)->cijena);
 
 
 }
+
