@@ -728,20 +728,20 @@ void azuriranjeVozila(){
 
 		fseek(fP, sizeof(int) + sizeof(VOZILO) * id, SEEK_SET);
 		fwrite(&temp[id], sizeof(VOZILO), 1, fP);
-		free(temp);
-		free(old);
-		fclose(fP);
-
-		return;
+		
 	}
 	else if (provjera == 'n') {
 
 		printf("Azuriranje otkazano.\n");
-		free(temp);
-		free(old);
-		fclose(fP);
-		return;
+		
 	}
+
+	free(temp);
+	free(old);
+	fclose(fP);
+
+	return;
+
 
 }
 
@@ -831,12 +831,9 @@ void brisanjeVozila() {
 	}
 	
 	
-	for (int i = 0; i < brojVozila; i++) {
-		free(temp + i);
-	}
+	free(temp);
 	fclose(fP);
 	
-
 	return;
 
 }
@@ -881,7 +878,7 @@ void pregledVozila() {
 		printf("==================================================================================================\n");
 
 
-		printf("Odaberit radnju koju zelite:");
+		printf("\nOdaberite radnju koju zelite:");
 		if (scanf("%d", &uvjet) != 1) {
 			printf("\nNeispravan unos. Molimo unesite broj.\n");
 			while (getchar() != '\n');

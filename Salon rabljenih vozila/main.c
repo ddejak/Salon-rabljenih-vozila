@@ -13,7 +13,6 @@ int main(void) {
 
 	int izvrsi;
 
-	//Izbornik
 	
 	while (1) {
 
@@ -24,7 +23,7 @@ int main(void) {
 		printf("\t\t\t\t1.Pregled dostupnih vozila.\n\
                 \t\t2.Unos novog vozila.\n\
                 \t\t3.Azuriranje vozila.\n\
-                \t\t4.Briasnje vozila.\n\
+                \t\t4.Brisanje vozila.\n\
                 \t\t5.Ugasite program.\n");
 		printf("===================================================================================================\n");
 		printf("===================================================================================================\n");
