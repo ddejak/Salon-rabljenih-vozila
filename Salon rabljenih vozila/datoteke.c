@@ -553,50 +553,73 @@ void unosNovogVozila() {
 	for (int i = 0; temp.markaVozila[i] != '\0'; i++) {
 		temp.markaVozila[i]=toupper(temp.markaVozila[i]);
 	}
+
 	printf("Unesite model vozila:");
 	scanf(" %19[^\n]", temp.nazivModelaVozila);
 	for (int i = 0; temp.nazivModelaVozila[i] != '\0'; i++) {
 		temp.nazivModelaVozila[i] = toupper(temp.nazivModelaVozila[i]);
 	}
+
 	printf("Unesite tip karoserije vozila:");
 	scanf(" %19[^\n]", temp.karoserijaVozila);
 	for (int i = 0; temp.karoserijaVozila[i] != '\0'; i++) {
 		temp.karoserijaVozila[i] = toupper(temp.karoserijaVozila[i]);
 	}
-	printf("Unesite godinu proizvodnje:");
-	scanf("%d", &temp.godinaProizvdnje);
+
+	do {
+		printf("Unesite godinu proizvodnje:");
+		scanf("%d", &temp.godinaProizvdnje);
+	} while (temp.godinaProizvdnje < 1920 || temp.godinaProizvdnje>2025);
+
 	printf("Unesite stanje vozila:");
 	scanf(" %19[^\n]", temp.stanje);
 	for (int i = 0; temp.stanje[i] != '\0'; i++) {
 		temp.stanje[i] = toupper(temp.stanje[i]);
 	}
+
 	printf("Unesite broj sasije:");
 	scanf(" %19[^\n]", temp.brojSasije);
 	for (int i = 0; temp.brojSasije[i] != '\0'; i++) {
 		temp.brojSasije[i] = toupper(temp.brojSasije[i]);
 	}
+
 	printf("Unesite vrstu motora:");
 	scanf(" %19[^\n]", temp.vrstaMotora);
 	for (int i = 0; temp.vrstaMotora[i] != '\0'; i++) {
 		temp.vrstaMotora[i] = toupper(temp.vrstaMotora[i]);
 	}
+
 	printf("Unesite vrstu mjenjaca:");
 	scanf(" %19[^\n]", temp.vrstaMjenjaca);
-
 	for (int i = 0; temp.vrstaMjenjaca[i] != '\0'; i++) {
 		temp.vrstaMjenjaca[i] = toupper(temp.vrstaMjenjaca[i]);
 	}
 
-	printf("Unesite koliko stupnjeva prijenosa ima mjenjac:");
-	scanf("%d", &temp.stupnjeviPrijenosa);
-	printf("Unesite kilometrazu vozila:");
-	scanf("%d", &temp.kilometraza);
-	printf("Unesite obujam motora u cm kubnim:");
-	scanf("%lf", &temp.obujamMotora);
-	printf("Unesite snagu motora u kW:");
-	scanf("%d", &temp.snagaMotora);
-	printf("Unesite cijenu vozila u eurima:");
-	scanf("%lf", &temp.cijena);
+	do {
+		printf("Unesite koliko stupnjeva prijenosa ima mjenjac:");
+		scanf("%d", &temp.stupnjeviPrijenosa);
+	} while (temp.stupnjeviPrijenosa < 3 || temp.stupnjeviPrijenosa>11);
+
+	do {
+		printf("Unesite kilometrazu vozila:");
+		scanf("%d", &temp.kilometraza);
+	} while (temp.kilometraza < 0 || temp.kilometraza>1000000);
+
+	do {
+		printf("Unesite obujam motora u cm kubnim:");
+		scanf("%lf", &temp.obujamMotora);
+
+	} while (temp.obujamMotora < 0 || temp.obujamMotora>12000);
+
+	do {
+		printf("Unesite snagu motora u kW:");
+		scanf("%d", &temp.snagaMotora);
+	} while (temp.snagaMotora < 0 || temp.snagaMotora>5000);
+
+	do {
+		printf("Unesite cijenu vozila u eurima:");
+		scanf("%lf", &temp.cijena);
+	} while (temp.cijena < 0 || temp.cijena >10000000);
 	
 	
 	fseek(fP, sizeof(int) + sizeof(VOZILO) * brojVozila, SEEK_SET);
