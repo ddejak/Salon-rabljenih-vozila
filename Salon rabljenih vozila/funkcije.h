@@ -4,7 +4,7 @@
 void ispis(VOZILO*, int);
 void unosNovogVozila();
 void pregledVozila();
-void ispisSvihVozila(const VOZILO* const, int);
+void ispisSvihVozila();
 void pregledVozilaMarka();
 void pregledVozilaKaroserija();
 void pregledVozilaMotor();
