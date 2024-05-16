@@ -45,9 +45,7 @@ void ispisSvihVozila() {
 }
 
 
-	for (int i = 0; i < brojVozila; i++) {
-		free(temp + i);
-	}
+	free(temp);
 	fclose(fP);
 
 	return;
@@ -104,9 +102,7 @@ void pregledVozilaMarka() {
 		printf("\nVozila marke %s nemamo na stanju.\n", marka);
 	}
 
-	for (int i = 0; i < brojVozila; i++) {
-		free(temp + i);
-	}
+	free(temp);
 	fclose(fP);
 
 	return;
@@ -158,9 +154,7 @@ void PregledVozilaKaroserija() {
 		printf("\nVozila oblika karoserije %s nemamo na stanju.\n", karoserija);
 	}
 
-	for (int i = 0; i < brojVozila; i++) {
-		free(temp + i);
-	}
+	free(temp);
 	fclose(fP);
 
 	return;
@@ -219,9 +213,7 @@ void PregledVozilaGodine() {
 		printf("\nVozila u rasponu godina %d-%d nemamo na stanju.\n",godinaDG,godinaGG);
 	}
 
-	for (int i = 0; i < brojVozila; i++) {
-		free(temp + i);
-	}
+	free(temp);
 	fclose(fP);
 
 	return;
@@ -284,9 +276,7 @@ void PregledVozilaKilometri() {
 		printf("\nVozila u rasponu kilometraze %d km-%d km nemamo na stanju.\n", kilometrazaDG, kilometrazaGG);
 	}
 
-	for (int i = 0; i < brojVozila; i++) {
-		free(temp + i);
-	}
+	free(temp);
 	fclose(fP);
 
 	return;
@@ -346,9 +336,7 @@ void PregledVozilaSnaga() {
 		printf("\nVozila u rasponu snage %d kW-%d kW nemamo na stanju.\n", snagaDG, snagaGG);
 	}
 
-	for (int i = 0; i < brojVozila; i++) {
-		free(temp + i);
-	}
+	free(temp);
 	fclose(fP);
 
 	return;
@@ -403,9 +391,7 @@ void PregledVozilaMotor() {
 		printf("\nVozila s motorom %s nemamo.\n",motor);
 	}
 
-	for (int i = 0; i < brojVozila; i++) {
-		free(temp + i);
-	}
+	free(temp);
 	fclose(fP);
 
 	return;
@@ -457,9 +443,7 @@ void PregledVozilaMjenjac() {
 		printf("\nVozila s mjenjacem %s nemamo.\n", mjenjac);
 	}
 
-	for (int i = 0; i < brojVozila; i++) {
-		free(temp + i);
-	}
+	free(temp);
 	fclose(fP);
 
 
@@ -522,9 +506,7 @@ void PregledVozilaCijena() {
 		printf("\nVozila u rasponu cijene %.0lf eura-%.0lf eura nemamo na stanju.\n", cijenaDG, cijenaGG);
 	}
 
-	for (int i = 0; i < brojVozila; i++) {
-		free(temp + i);
-	}
+	free(temp);
 	fclose(fP);
 
 	return;
@@ -751,10 +733,8 @@ void azuriranjeVozila(){
 
 		fseek(fP, sizeof(int) + sizeof(VOZILO) * id, SEEK_SET);
 		fwrite(&temp[id], sizeof(VOZILO), 1, fP);
-		for (int i = 0; i < brojVozila; i++) {
-		free(temp+i);
-		free(old+i);
-	    }
+		free(temp);
+		free(old);
 		fclose(fP);
 
 		return;
@@ -857,10 +837,10 @@ void brisanjeVozila() {
 		printf("Brisanje otkazano.\n");
 	}
 	
+	
 	for (int i = 0; i < brojVozila; i++) {
 		free(temp + i);
 	}
-	free(temp);
 	fclose(fP);
 	
 
