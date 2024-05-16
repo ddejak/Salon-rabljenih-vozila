@@ -85,6 +85,9 @@ void pregledVozilaMarka() {
 	int brojac = 0;
 	printf("Unesite marku vozila koju zelite pronaci:");
 	scanf("%s", marka);
+	for ( i = 0; marka[i] != '\0'; i++) {
+		marka[i] = toupper(marka[i]);
+	}
 
 	for (i = 0; i < brojVozila; i++) {
 		if (strcmp(marka, (temp + i)->markaVozila) == 0) {
@@ -138,6 +141,9 @@ void pregledVozilaKaroserija() {
 	int brojac = 0;
 	printf("Unesite karoseriju vozila koju zelite pronaci:");
 	scanf("%s", karoserija);
+	for ( i = 0; karoserija[i] != '\0'; i++) {
+		karoserija[i] = toupper(karoserija[i]);
+	}
 
 	for (i = 0; i < brojVozila; i++) {
 		if (strcmp(karoserija, (temp + i)->karoserijaVozila) == 0) {
@@ -370,6 +376,10 @@ void pregledVozilaMotor() {
 	int brojac = 0;
 	printf("Unesite vrstu motora vozila koju zelite pronaci:");
 	scanf("%s", motor);
+	for (i = 0; motor[i] != '\0'; i++) {
+		motor[i] = toupper(motor[i]);
+	}
+	
 
 	for (i = 0; i < brojVozila; i++) {
 		if (strcmp(motor, (temp + i)->vrstaMotora) == 0) {
@@ -424,6 +434,9 @@ void pregledVozilaMjenjac() {
 	int brojac = 0;
 	printf("Unesite vrstu mjenjaca vozila koju zelite pronaci:");
 	scanf("%s", mjenjac);
+	for (i = 0; mjenjac[i] != '\0'; i++) {
+		mjenjac[i] = toupper(mjenjac[i]);
+	}
 
 	for (i = 0; i < brojVozila; i++) {
 		if (strcmp(mjenjac, (temp + i)->vrstaMjenjaca) == 0) {
@@ -569,6 +582,7 @@ void unosNovogVozila() {
 	}
 	printf("Unesite vrstu mjenjaca:");
 	scanf(" %19[^\n]", temp.vrstaMjenjaca);
+
 	for (int i = 0; temp.vrstaMjenjaca[i] != '\0'; i++) {
 		temp.vrstaMjenjaca[i] = toupper(temp.vrstaMjenjaca[i]);
 	}
@@ -668,18 +682,27 @@ void azuriranjeVozila(){
 
 		printf("\n\nUnesite marku vozila:");
 		scanf(" %19[^\n]", (temp + id)->markaVozila);
+		for (int i = 0; (temp + id)->markaVozila[i] != '\0'; i++) {
+			(temp + id)->markaVozila[i] = toupper((temp + id)->markaVozila[i]);
+		}
 		if (strcmp((temp + id)->markaVozila, "0") == 0) {
 
 			strcpy((temp + id)->markaVozila, (old + id)->markaVozila);
 		}
 		printf("Unesite model vozila:");
 		scanf(" %19[^\n]", (temp + id)->nazivModelaVozila);
+		for (int i = 0; (temp + id)->nazivModelaVozila[i] != '\0'; i++) {
+			(temp + id)->nazivModelaVozila[i] = toupper((temp + id)->nazivModelaVozila[i]);
+		}
 		if (strcmp((temp + id)->nazivModelaVozila, "0") == 0) {
 
 			strcpy((temp + id)->nazivModelaVozila, (old + id)->nazivModelaVozila);
 		}
 		printf("Unesite tip karoserije vozila:");
 		scanf(" %19[^\n]", (temp + id)->karoserijaVozila);
+		for (int i = 0; (temp + id)->karoserijaVozila[i] != '\0'; i++) {
+			(temp + id)->karoserijaVozila[i] = toupper((temp + id)->karoserijaVozila[i]);
+		}
 		if (strcmp((temp + id)->karoserijaVozila, "0") == 0) {
 
 			strcpy((temp + id)->karoserijaVozila, (old + id)->karoserijaVozila);
@@ -692,24 +715,36 @@ void azuriranjeVozila(){
 		}
 		printf("Unesite stanje vozila:");
 		scanf(" %19[^\n]", (temp + id)->stanje);
+		for (int i = 0; (temp + id)->stanje[i] != '\0'; i++) {
+			(temp + id)->stanje[i] = toupper((temp + id)->stanje[i]);
+		}
 		if (strcmp((temp + id)->stanje, "0") == 0) {
 
 			strcpy((temp + id)->stanje, (old + id)->stanje);
 		}
 		printf("Unesite broj sasije:");
 		scanf(" %19[^\n]", (temp + id)->brojSasije);
+		for (int i = 0; (temp + id)->brojSasije[i] != '\0'; i++) {
+			(temp + id)->brojSasije[i] = toupper((temp + id)->brojSasije[i]);
+		}
 		if (strcmp((temp + id)->brojSasije, "0") == 0) {
 
 			strcpy((temp + id)->brojSasije, (old + id)->brojSasije);
 		}
 		printf("Unesite vrstu motora:");
 		scanf(" %19[^\n]", (temp + id)->vrstaMotora);
+		for (int i = 0; (temp + id)->vrstaMotora[i] != '\0'; i++) {
+			(temp + id)->vrstaMotora[i] = toupper((temp + id)->vrstaMotora[i]);
+		}
 		if (strcmp((temp + id)->vrstaMotora, "0") == 0) {
 
 			strcpy((temp + id)->vrstaMotora, (old + id)->vrstaMotora);
 		}
 		printf("Unesite vrstu mjenjaca:");
 		scanf(" %19[^\n]", (temp + id)->vrstaMjenjaca);
+		for (int i = 0; (temp + id)->vrstaMjenjaca[i] != '\0'; i++) {
+			(temp + id)->vrstaMjenjaca[i] = toupper((temp + id)->vrstaMjenjaca[i]);
+		}
 		if (strcmp((temp + id)->vrstaMjenjaca, "0") == 0) {
 
 			strcpy((temp + id)->vrstaMjenjaca, (old + id)->vrstaMjenjaca);
