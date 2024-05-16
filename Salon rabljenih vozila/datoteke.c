@@ -108,7 +108,7 @@ void pregledVozilaMarka() {
 	return;
 }
 
-void PregledVozilaKaroserija() {
+void pregledVozilaKaroserija() {
 
 	FILE* fP = NULL;
 	fP = fopen("vozila.bin", "rb+");
@@ -164,7 +164,7 @@ void PregledVozilaKaroserija() {
 }
 
 
-void PregledVozilaGodine() {
+void pregledVozilaGodine() {
 	FILE* fP = NULL;
 	fP = fopen("vozila.bin", "rb+");
 	if (fP == NULL) {
@@ -172,7 +172,6 @@ void PregledVozilaGodine() {
 		exit(EXIT_FAILURE);
 	}
 	fread(&brojVozila, sizeof(int), 1, fP);
-	//printf("Broj vozila na stanju je: %d\n\n", brojVozila);
 	VOZILO* temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
 
 	if (temp == NULL) {
@@ -223,7 +222,7 @@ void PregledVozilaGodine() {
 
 
 
-void PregledVozilaKilometri() {
+void pregledVozilaKilometri() {
 
 
 	
@@ -234,7 +233,6 @@ void PregledVozilaKilometri() {
 		exit(EXIT_FAILURE);
 	}
 	fread(&brojVozila, sizeof(int), 1, fP);
-	//printf("Broj vozila na stanju je: %d\n\n", brojVozila);
 	VOZILO* temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
 
 	if (temp == NULL) {
@@ -283,7 +281,7 @@ void PregledVozilaKilometri() {
 
 }
 
-void PregledVozilaSnaga() {
+void pregledVozilaSnaga() {
 
 
 
@@ -294,7 +292,6 @@ void PregledVozilaSnaga() {
 		exit(EXIT_FAILURE);
 	}
 	fread(&brojVozila, sizeof(int), 1, fP);
-	//printf("Broj vozila na stanju je: %d\n\n", brojVozila);
 	VOZILO* temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
 
 	if (temp == NULL) {
@@ -343,7 +340,7 @@ void PregledVozilaSnaga() {
 
 }
 
-void PregledVozilaMotor() {
+void pregledVozilaMotor() {
 	
 	FILE* fP = NULL;
 	fP = fopen("vozila.bin", "rb+");
@@ -352,7 +349,6 @@ void PregledVozilaMotor() {
 		exit(EXIT_FAILURE);
 	}
 	fread(&brojVozila, sizeof(int), 1, fP);
-	//printf("Broj vozila na stanju je: %d\n\n", brojVozila);
 	VOZILO* temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
 
 	if (temp == NULL) {
@@ -398,7 +394,7 @@ void PregledVozilaMotor() {
 
 }
 
-void PregledVozilaMjenjac() {
+void pregledVozilaMjenjac() {
 
 	FILE* fP = NULL;
 	fP = fopen("vozila.bin", "rb+");
@@ -407,7 +403,6 @@ void PregledVozilaMjenjac() {
 		exit(EXIT_FAILURE);
 	}
 	fread(&brojVozila, sizeof(int), 1, fP);
-	//printf("Broj vozila na stanju je: %d\n\n", brojVozila);
 	VOZILO* temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
 
 	if (temp == NULL) {
@@ -454,7 +449,7 @@ void PregledVozilaMjenjac() {
 }
 
 
-void PregledVozilaCijena() {
+void pregledVozilaCijena() {
 
 
 
@@ -742,10 +737,8 @@ void azuriranjeVozila(){
 	else if (provjera == 'n') {
 
 		printf("Azuriranje otkazano.\n");
-		for (int i = 0; i < brojVozila; i++) {
-			free(temp + i);
-			free(old + i);
-		}
+		free(temp);
+		free(old);
 		fclose(fP);
 		return;
 	}
@@ -872,7 +865,7 @@ void pregledVozila() {
 	while (1) {
 
 		system("cls");
-		printf("\t\t\tDobrodosli u izbornik za pregled vozila\n");
+		printf("=================================IZBORNIK ZA PRETRAGU VOZILA======================================\n");
 		printf("==================================================================================================\n");
 		printf("\t\t\t1.Pregled svih vozila.\n\
                 \t2.Pregled vozila unosom marke vozila.\n\
@@ -885,6 +878,8 @@ void pregledVozila() {
                 \t9.Pregled Vozila po rasponu cijene.\n\
                 \t10.Vracanje u glavni izbornik\n");
 		printf("==================================================================================================\n");
+		printf("==================================================================================================\n");
+
 
 		printf("Odaberit radnju koju zelite:");
 		if (scanf("%d", &uvjet) != 1) {
@@ -897,13 +892,13 @@ void pregledVozila() {
 
 		case 1:ispisSvihVozila(); break;
 		case 2:pregledVozilaMarka(); break;
-		case 3:PregledVozilaKaroserija();  break;
-		case 4:PregledVozilaGodine();  break;
-		case 5:PregledVozilaSnaga(); break;
-		case 6:PregledVozilaKilometri();  break;
-		case 7:PregledVozilaMotor(); break;
-		case 8:PregledVozilaMjenjac();  break;
-		case 9:PregledVozilaCijena(); break;
+		case 3:pregledVozilaKaroserija();  break;
+		case 4:pregledVozilaGodine();  break;
+		case 5:pregledVozilaSnaga(); break;
+		case 6:pregledVozilaKilometri();  break;
+		case 7:pregledVozilaMotor(); break;
+		case 8:pregledVozilaMjenjac();  break;
+		case 9:pregledVozilaCijena(); break;
 		case 10:return;
 		default: printf("Krivi unos.\n"); break;
 
