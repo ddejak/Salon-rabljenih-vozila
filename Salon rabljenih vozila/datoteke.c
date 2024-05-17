@@ -9,7 +9,7 @@
 #include "strukture.h"
 
 static int brojVozila = 0;
-
+//zastita za unos kod pregleda snage kilmoetara i ostalih stvari 
 
 void ispisSvihVozila() {
 
@@ -200,7 +200,7 @@ void pregledVozilaGodine() {
 	int brojac = 0;
 	printf("Unesite donju granicu raspon godine koju trazite:");
 	scanf("%d", &godinaDG);
-	printf("Unesite donju granicu raspon godine koju trazite:");
+	printf("Unesite gornju granicu raspon godine koju trazite:");
 	scanf("%d", &godinaGG);
 
 	for (i = 0; i < brojVozila; i++) {
