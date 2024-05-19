@@ -9,7 +9,6 @@
 #include "strukture.h"
 
 static int brojVozila = 0;
-//zastita za unos kod pregleda snage kilmoetara i ostalih stvari 
 
 void ispisSvihVozila() {
 
@@ -92,7 +91,7 @@ void pregledVozilaMarka() {
 	for (i = 0; i < brojVozila; i++) {
 		if (strcmp(marka, (temp + i)->markaVozila) == 0) {
 
-
+			printf("\n");
 			ispis(temp, i);
 			brojac++;
 		}
@@ -148,7 +147,7 @@ void pregledVozilaKaroserija() {
 	for (i = 0; i < brojVozila; i++) {
 		if (strcmp(karoserija, (temp + i)->karoserijaVozila) == 0) {
 
-			
+			printf("\n");
 			ispis(temp, i);
 			brojac++;
 		}
@@ -198,15 +197,19 @@ void pregledVozilaGodine() {
 	int godinaGG;
 	int i;
 	int brojac = 0;
-	printf("Unesite donju granicu raspon godine koju trazite:");
-	scanf("%d", &godinaDG);
-	printf("Unesite gornju granicu raspon godine koju trazite:");
-	scanf("%d", &godinaGG);
+	do {
+		printf("Unesite donju granicu raspon godine koju trazite:");
+		scanf("%d", &godinaDG);
+	} while (godinaDG < 1920 || godinaDG>2025);
+	do {
+		printf("Unesite gornju granicu raspon godine koju trazite:");
+		scanf("%d", &godinaGG);
+	} while (godinaGG <= godinaDG || godinaGG>2025);
 
 	for (i = 0; i < brojVozila; i++) {
 		if ((godinaDG <= ((temp + i)->godinaProizvdnje)) && (godinaGG >= ((temp + i)->godinaProizvdnje))) {
 
-
+			printf("\n");
 			ispis(temp, i);
 			brojac++;
 		}
@@ -259,15 +262,19 @@ void pregledVozilaKilometri() {
 	int kilometrazaGG;
 	int i;
 	int brojac = 0;
-	printf("Unesite donju granicu raspon kilometraze koji trazite:");
-	scanf("%d", &kilometrazaDG);
-	printf("Unesite donju granicu raspon kilometraze koji trazite:");
-	scanf("%d", &kilometrazaGG);
+	do {
+		printf("Unesite donju granicu raspon kilometraze koji trazite:");
+		scanf("%d", &kilometrazaDG);
+	} while (kilometrazaDG < 0 || kilometrazaDG>1000000);
+	do {
+		printf("Unesite gornju granicu raspon kilometraze koji trazite:");
+		scanf("%d", &kilometrazaGG);
+	} while (kilometrazaGG <= kilometrazaDG || kilometrazaGG>1000000);
 
 	for (i = 0; i < brojVozila; i++) {
 		if ((kilometrazaDG <= ((temp+i)->kilometraza)) && (kilometrazaGG >= ((temp+i)->kilometraza))) {
 
-
+			printf("\n");
 			ispis(temp, i);
 			brojac++;
 		}
@@ -318,15 +325,19 @@ void pregledVozilaSnaga() {
 	int snagaGG;
 	int i;
 	int brojac = 0;
-	printf("Unesite donju granicu snage motora u KW koji trazite:");
-	scanf("%d", &snagaDG);
-	printf("Unesite donju granicu snage motora u KW  koji trazite:");
-	scanf("%d", &snagaGG);
+	do {
+		printf("Unesite donju granicu snage motora u KW koji trazite:");
+		scanf("%d", &snagaDG);
+	} while (snagaDG < 0 || snagaDG > 2000);
+	do {
+		printf("Unesite gornju granicu snage motora u KW  koji trazite:");
+		scanf("%d", &snagaGG);
+	} while (snagaGG <= snagaDG || snagaGG >2000);
 
 	for (i = 0; i < brojVozila; i++) {
 		if ((snagaDG <= ((temp + i)->snagaMotora)) && (snagaGG >= ((temp + i)->snagaMotora))) {
 
-
+			printf("\n");
 			ispis(temp, i);
 			brojac++;
 		}
@@ -384,7 +395,7 @@ void pregledVozilaMotor() {
 	for (i = 0; i < brojVozila; i++) {
 		if (strcmp(motor, (temp + i)->vrstaMotora) == 0) {
 
-
+			printf("\n");
 			ispis(temp, i);
 			brojac++;
 		}
@@ -441,6 +452,7 @@ void pregledVozilaMjenjac() {
 	for (i = 0; i < brojVozila; i++) {
 		if (strcmp(mjenjac, (temp + i)->vrstaMjenjaca) == 0) {
 
+			printf("\n");
 			ispis(temp, i);
 			brojac++;
 		}
@@ -493,15 +505,18 @@ void pregledVozilaCijena() {
 	double cijenaGG;
 	int i;
 	int brojac = 0;
-	printf("Unesite donju granicu raspon cijene koji trazite:");
-	scanf("%lf", &cijenaDG);
-	printf("Unesite donju granicu raspon cijene koji trazite:");
-	scanf("%lf", &cijenaGG);
-
+	do {
+		printf("Unesite donju granicu raspon cijene koji trazite:");
+		scanf("%lf", &cijenaDG);
+	} while (cijenaDG < 0 || cijenaDG >1000000);
+	do {
+		printf("Unesite gornju granicu raspon cijene koji trazite:");
+		scanf("%lf", &cijenaGG);
+	} while (cijenaGG <= cijenaDG || cijenaGG>1000000);
 	for (i = 0; i < brojVozila; i++) {
 		if ((cijenaDG <= ((temp + i)->cijena)) && (cijenaGG >= ((temp + i)->cijena))) {
 
-
+			printf("\n");
 			ispis(temp, i);
 			brojac++;
 		}
@@ -614,7 +629,7 @@ void unosNovogVozila() {
 	do {
 		printf("Unesite snagu motora u kW:");
 		scanf("%d", &temp.snagaMotora);
-	} while (temp.snagaMotora < 0 || temp.snagaMotora>5000);
+	} while (temp.snagaMotora < 0 || temp.snagaMotora>1500);
 
 	do {
 		printf("Unesite cijenu vozila u eurima:");
