@@ -2,8 +2,14 @@
 
 
 #include <stdio.h>
-#include "strukture.h"
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <ctype.h>
 #include "funkcije.h"
+#include "strukture.h"
+
+
 
 void ispis(VOZILO* temp, int i) {
 
@@ -27,4 +33,6 @@ void ispis(VOZILO* temp, int i) {
 
 
 }
+
+
 

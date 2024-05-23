@@ -26,6 +26,7 @@ static int brojVozila = 0;
 //ispraviti brisanje vozila, id brise nulto mjesto a ne index na kojemu je zapisano vozilo.
 //treba sprijeciti unos slova u intove pri unosu vozila i azuriranju
 //
+
 void ispisSvihVozila() {
 
 	FILE* fP = NULL;
@@ -39,25 +40,25 @@ void ispisSvihVozila() {
 	VOZILO* temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
 
 	if (temp == NULL) {
-	perror("Zauzimanje memorije za vozila");
-	exit(EXIT_FAILURE);
-}
+		perror("Zauzimanje memorije za vozila");
+		exit(EXIT_FAILURE);
+	}
 
 	fread(temp, sizeof(VOZILO), brojVozila, fP);
 
 
 
 	if (temp == NULL) {
-	printf("Polje vozila je prazno!\n");
-	return;
-}
+		printf("Polje vozila je prazno!\n");
+		return;
+	}
 
 	int i;
 
 	for (i = 0; i < brojVozila; i++)
-{
+	{
 		ispis(temp, i);
-}
+	}
 
 
 	free(temp);
@@ -100,7 +101,7 @@ void pregledVozilaMarka() {
 	int brojac = 0;
 	printf("Unesite marku vozila koju zelite pronaci:");
 	scanf("%s", marka);
-	for ( i = 0; marka[i] != '\0'; i++) {
+	for (i = 0; marka[i] != '\0'; i++) {
 		marka[i] = toupper(marka[i]);
 	}
 
@@ -115,7 +116,7 @@ void pregledVozilaMarka() {
 
 
 	}
-	
+
 	if (brojac == 0) {
 		printf("\nVozila marke %s nemamo na stanju.\n", marka);
 	}
@@ -156,7 +157,7 @@ void pregledVozilaKaroserija() {
 	int brojac = 0;
 	printf("Unesite karoseriju vozila koju zelite pronaci:");
 	scanf("%s", karoserija);
-	for ( i = 0; karoserija[i] != '\0'; i++) {
+	for (i = 0; karoserija[i] != '\0'; i++) {
 		karoserija[i] = toupper(karoserija[i]);
 	}
 
@@ -220,7 +221,7 @@ void pregledVozilaGodine() {
 	do {
 		printf("Unesite gornju granicu raspon godine koju trazite:");
 		scanf("%d", &godinaGG);
-	} while (godinaGG <= godinaDG || godinaGG>2025);
+	} while (godinaGG <= godinaDG || godinaGG > 2025);
 
 	for (i = 0; i < brojVozila; i++) {
 		if ((godinaDG <= ((temp + i)->godinaProizvdnje)) && (godinaGG >= ((temp + i)->godinaProizvdnje))) {
@@ -234,7 +235,7 @@ void pregledVozilaGodine() {
 	}
 
 	if (brojac == 0) {
-		printf("\nVozila u rasponu godina %d-%d nemamo na stanju.\n",godinaDG,godinaGG);
+		printf("\nVozila u rasponu godina %d-%d nemamo na stanju.\n", godinaDG, godinaGG);
 	}
 
 	free(temp);
@@ -250,7 +251,7 @@ void pregledVozilaGodine() {
 void pregledVozilaKilometri() {
 
 
-	
+
 	FILE* fP = NULL;
 	fP = fopen("vozila.bin", "rb+");
 	if (fP == NULL) {
@@ -285,10 +286,10 @@ void pregledVozilaKilometri() {
 	do {
 		printf("Unesite gornju granicu raspon kilometraze koji trazite:");
 		scanf("%d", &kilometrazaGG);
-	} while (kilometrazaGG <= kilometrazaDG || kilometrazaGG>1000000);
+	} while (kilometrazaGG <= kilometrazaDG || kilometrazaGG > 1000000);
 
 	for (i = 0; i < brojVozila; i++) {
-		if ((kilometrazaDG <= ((temp+i)->kilometraza)) && (kilometrazaGG >= ((temp+i)->kilometraza))) {
+		if ((kilometrazaDG <= ((temp + i)->kilometraza)) && (kilometrazaGG >= ((temp + i)->kilometraza))) {
 
 			printf("\n");
 			ispis(temp, i);
@@ -348,7 +349,7 @@ void pregledVozilaSnaga() {
 	do {
 		printf("Unesite gornju granicu snage motora u KW  koji trazite:");
 		scanf("%d", &snagaGG);
-	} while (snagaGG <= snagaDG || snagaGG >2000);
+	} while (snagaGG <= snagaDG || snagaGG > 2000);
 
 	for (i = 0; i < brojVozila; i++) {
 		if ((snagaDG <= ((temp + i)->snagaMotora)) && (snagaGG >= ((temp + i)->snagaMotora))) {
@@ -374,7 +375,7 @@ void pregledVozilaSnaga() {
 }
 
 void pregledVozilaMotor() {
-	
+
 	FILE* fP = NULL;
 	fP = fopen("vozila.bin", "rb+");
 	if (fP == NULL) {
@@ -406,7 +407,7 @@ void pregledVozilaMotor() {
 	for (i = 0; motor[i] != '\0'; i++) {
 		motor[i] = toupper(motor[i]);
 	}
-	
+
 
 	for (i = 0; i < brojVozila; i++) {
 		if (strcmp(motor, (temp + i)->vrstaMotora) == 0) {
@@ -421,7 +422,7 @@ void pregledVozilaMotor() {
 	}
 
 	if (brojac == 0) {
-		printf("\nVozila s motorom %s nemamo.\n",motor);
+		printf("\nVozila s motorom %s nemamo.\n", motor);
 	}
 
 	free(temp);
@@ -528,7 +529,7 @@ void pregledVozilaCijena() {
 	do {
 		printf("Unesite gornju granicu raspon cijene koji trazite:");
 		scanf("%lf", &cijenaGG);
-	} while (cijenaGG <= cijenaDG || cijenaGG>1000000);
+	} while (cijenaGG <= cijenaDG || cijenaGG > 1000000);
 	for (i = 0; i < brojVozila; i++) {
 		if ((cijenaDG <= ((temp + i)->cijena)) && (cijenaGG >= ((temp + i)->cijena))) {
 
@@ -598,8 +599,11 @@ void unosNovogVozila() {
 	}
 
 	do {
-		printf("Unesite godinu proizvodnje:");
-		scanf("%d", &temp.godinaProizvdnje);
+		printf("Unesite godinu proizvodnje vozila:");
+		if (scanf("%d", &temp.godinaProizvdnje) != 1) {
+			while (getchar() != '\n');
+			continue;
+		}
 	} while (temp.godinaProizvdnje < 1920 || temp.godinaProizvdnje>2025);
 
 	printf("Unesite stanje vozila:");
@@ -628,29 +632,45 @@ void unosNovogVozila() {
 
 	do {
 		printf("Unesite koliko stupnjeva prijenosa ima mjenjac:");
-		scanf("%d", &temp.stupnjeviPrijenosa);
+		if (scanf("%d", &temp.stupnjeviPrijenosa) != 1) {
+			while (getchar() != '\n');
+			continue;
+		}
 	} while (temp.stupnjeviPrijenosa < 3 || temp.stupnjeviPrijenosa>11);
 
 	do {
 		printf("Unesite kilometrazu vozila:");
-		scanf("%d", &temp.kilometraza);
+		if (scanf("%d", &temp.kilometraza) != 1) {
+			while (getchar() != '\n');
+			continue;
+		}
 	} while (temp.kilometraza < 0 || temp.kilometraza>1000000);
 
 	do {
 		printf("Unesite obujam motora u cm kubnim:");
-		scanf("%lf", &temp.obujamMotora);
+		if (scanf("%d", &temp.obujamMotora) != 1) {
+			while (getchar() != '\n');
+			continue;
+		}
 
 	} while (temp.obujamMotora < 0 || temp.obujamMotora>12000);
 
 	do {
 		printf("Unesite snagu motora u kW:");
-		scanf("%d", &temp.snagaMotora);
+		if (scanf("%d", &temp.snagaMotora) != 1) {
+			while (getchar() != '\n');
+			continue;
+		}
 	} while (temp.snagaMotora < 0 || temp.snagaMotora>1500);
 
 	do {
 		printf("Unesite cijenu vozila u eurima:");
-		scanf("%lf", &temp.cijena);
+		if (scanf("%d", &temp.cijena) != 1) {
+			while (getchar() != '\n');
+			continue;
+		}
 	} while (temp.cijena < 0 || temp.cijena >10000000);
+
 	
 	
 	fseek(fP, sizeof(int) + sizeof(VOZILO) * brojVozila, SEEK_SET);
@@ -773,12 +793,19 @@ void azuriranjeVozila(){
 
 			strcpy((temp + index)->karoserijaVozila, (old + index)->karoserijaVozila);
 		}
-		printf("Unesite godinu proizvodnje:");
-		scanf("%d", &(temp + index)->godinaProizvdnje);
+
+		do {
+			printf("Unesite godinu proizvodnje vozila:");
+			if (scanf("%d", &(temp+index)->godinaProizvdnje) != 1) {
+				while (getchar() != '\n');
+				continue;
+			}
+		} while ((temp + index)->godinaProizvdnje == 0 || (temp + index)->godinaProizvdnje < 1920 || (temp + index)->godinaProizvdnje>2025);
 		if ((temp + index)->godinaProizvdnje == 0) {
 
 			(temp + index)->godinaProizvdnje = (old + index)->godinaProizvdnje;
 		}
+
 		printf("Unesite stanje vozila:");
 		scanf(" %19[^\n]", (temp + index)->stanje);
 		for (int i = 0; (temp + index)->stanje[i] != '\0'; i++) {
@@ -816,37 +843,77 @@ void azuriranjeVozila(){
 			strcpy((temp + index)->vrstaMjenjaca, (old + index)->vrstaMjenjaca);
 		}
 
-		printf("Unesite koliko stupnjeva prijenosa ima mjenjac:");
-		scanf("%d", &(temp + index)->stupnjeviPrijenosa);
+
+		do {
+			printf("Unesite koliko stupnjeva prijenosa ima mjenjac:");
+			if (scanf("%d", &(temp + index)->stupnjeviPrijenosa) != 1) {
+				while (getchar() != '\n');
+				continue;
+			}
+		} while ((temp + index)->stupnjeviPrijenosa < 3 || (temp + index)->stupnjeviPrijenosa>11 || (temp + index)->stupnjeviPrijenosa == 0);
 		if ((temp + index)->stupnjeviPrijenosa == 0) {
 
 			(temp + index)->stupnjeviPrijenosa = (old + index)->stupnjeviPrijenosa;
 		}
-		printf("Unesite kilometrazu vozila:");
-		scanf("%d", &(temp + index)->kilometraza);
+
+
+
+		
+		do {
+			printf("Unesite kilometrazu vozila:");
+			if (scanf("%d", &(temp + index)->kilometraza) != 1) {
+				while (getchar() != '\n');
+				continue;
+			}
+		} while ((temp + index)->kilometraza < -1 || (temp + index)->kilometraza>1000000);
 		if ((temp + index)->kilometraza == 0) {
 
 			(temp + index)->kilometraza = (old + index)->kilometraza;
 		}
-		printf("Unesite obujam motora u cm kubnim:");
-		scanf("%lf", &(temp + index)->obujamMotora);
+
+
+		
+		do {
+			printf("Unesite obujam motora u cm kubnim:");
+			if (scanf("%d", &(temp + index)->obujamMotora) != 1) {
+				while (getchar() != '\n');
+				continue;
+			}
+
+		} while ((temp + index)->obujamMotora < -1 || (temp + index)->obujamMotora>12000);
 		if ((temp + index)->obujamMotora == 0) {
 
 			(temp + index)->obujamMotora = (old + index)->obujamMotora;
 		}
-		printf("Unesite snagu motora u kW:");
-		scanf("%d", &(temp + index)->snagaMotora);
+
+
+		
+		do {
+			printf("Unesite snagu motora u kW:");
+			if (scanf("%d", &(temp + index)->snagaMotora) != 1) {
+				while (getchar() != '\n');
+				continue;
+			}
+		} while ((temp + index)->snagaMotora < -1 || (temp + index)->snagaMotora>1500);
 		if ((temp + index)->snagaMotora == 0) {
 
 			(temp + index)->snagaMotora = (old + index)->snagaMotora;
 		}
-		printf("Unesite cijenu vozila u eurima:");
-		scanf("%lf", &(temp + index)->cijena);
+
+
+		
+		do {
+			printf("Unesite cijenu vozila u eurima:");
+			if (scanf("%d", &(temp + index)->cijena) != 1) {
+				while (getchar() != '\n');
+				continue;
+			}
+		} while ((temp + index)->cijena < -1 || (temp + index)->cijena >10000000);
 		if ((temp + index)->cijena == 0) {
 
 			(temp + index)->cijena = (old + index)->cijena;
 		}
-
+		
 
 		fseek(fP, sizeof(int) + sizeof(VOZILO) * index, SEEK_SET);
 		fwrite(&temp[index], sizeof(VOZILO), 1, fP);
