@@ -823,7 +823,7 @@ void azuriranjeVozila(){
 			(temp + index)->stupnjeviPrijenosa = (old + index)->stupnjeviPrijenosa;
 		}
 		printf("Unesite kilometrazu vozila:");
-		scanf("%d", &(temp + id)->kilometraza);
+		scanf("%d", &(temp + index)->kilometraza);
 		if ((temp + index)->kilometraza == 0) {
 
 			(temp + index)->kilometraza = (old + index)->kilometraza;
@@ -848,7 +848,7 @@ void azuriranjeVozila(){
 		}
 
 
-		fseek(fP, sizeof(int) + sizeof(VOZILO) * id, SEEK_SET);
+		fseek(fP, sizeof(int) + sizeof(VOZILO) * index, SEEK_SET);
 		fwrite(&temp[index], sizeof(VOZILO), 1, fP);
 		
 	}
