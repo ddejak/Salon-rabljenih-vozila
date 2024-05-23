@@ -9,7 +9,9 @@
 #include "strukture.h"
 
 static int brojVozila = 0;
-
+//ispraviti brisanje vozila, id brise nulto mjesto a ne index na kojemu je zapisano vozilo.
+//treba sprijeciti unos slova u intove pri unosu vozila i azuriranju
+//
 void ispisSvihVozila() {
 
 	FILE* fP = NULL;
@@ -839,9 +841,10 @@ void azuriranjeVozila(){
 
 }
 
-void brisanjeVozila() {
+/*void brisanjeVozila() {
 	int pin;
 	int id;
+	int index=0;
 	char provjera;
 	int i;
 	printf("Unesite administratorski pin:");
@@ -882,15 +885,131 @@ void brisanjeVozila() {
 			while (getchar() != '\n');
 			continue;
 		}
-		if (id<0 || id>(temp + (brojVozila - 1))->redniBrUSustavu) {
-			printf("\nNepostojeci id, ponovite unos:");
+
+		if (id == (temp + index)->redniBrUSustavu){
+
+			printf("Obrisat cete ovo vozilo:\n\n");
+			ispis(temp, index);
+
+
+			printf("Jeste li sigurni?\nAko jeste unesite Y, a ako niste unesite n:");
+			do {
+				scanf(" %c", &provjera);
+				if (provjera != 'Y' && provjera != 'n') {
+					printf("\nKrivi unos, unesite Y za da ili unesite n za ne:");
+				}
+			} while (provjera != 'Y' && provjera != 'n');
+
+			if (provjera == 'Y') {
+
+				fseek(fP, 0, SEEK_END);
+
+				for (i = index+1; i < brojVozila; i++) {
+					fread(&temp[i - 1], sizeof(VOZILO), 1, fP);
+					fseek(fP, index * sizeof(VOZILO), SEEK_SET);
+					fwrite(&temp[i - 1], sizeof(VOZILO), 1, fP);
+					fseek(fP, (i * sizeof(VOZILO)), SEEK_SET);
+				}
+
+				brojVozila--;
+
+				printf("Vozilo s ID-jem %d je obrisano.\n", id);
+
+
+				fseek(fP, 0, SEEK_SET);
+				fwrite(&brojVozila, sizeof(int), 1, fP);
+			}
+			else if (provjera == 'n') {
+				printf("Brisanje otkazano.\n");
+			}
+
+
+			free(temp);
+			fclose(fP);
+
+			return;
 		}
 		
-	} while (id<0 || id>(temp + (brojVozila - 1))->redniBrUSustavu);
+		
+		if (index == brojVozila - 1) {
+			printf("Vozilo s %d id ne postoji u sustavu", id);
+			free(temp);
+			free(fP);
+			return;
+		}
+
+		index++;
+		
+	} while (id!=(temp+index)->redniBrUSustavu);
+
+
+	
+
+}*/
+
+void brisanjeVozila() {
+	int pin;
+	int id;
+	char provjera;
+	int i;
+	int flag = 0;
+	int index = -1;
+	printf("Unesite administratorski pin:");
+	scanf("%d", &pin);
+	if (pin != 3009) {
+		printf("Kriva lozinka, nemate pristup unosu novih vozila.\n");
+		return;
+	}
+
+
+	FILE* fP = NULL;
+	fP = fopen("vozila.bin", "rb+");
+	if (fP == NULL) {
+		fP = fopen("vozila.bin", "wb+");
+	}
+	if (fP == NULL) {
+		perror("Greska kod funkcije unosNovogVozila.");
+		exit(EXIT_FAILURE);
+	}
+
+	fread(&brojVozila, sizeof(int), 1, fP);
+
+	if (brojVozila == 0) {
+		printf("Nema unesenih vozila, ne mozete koristiti funkciju brisanje vozila.\n");
+		return;
+	}
+
+
+	VOZILO* temp = NULL;
+	temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
+	fread(temp, sizeof(VOZILO), brojVozila, fP);
+	printf("Broj Vozila na stanju je: %d\n", brojVozila);
+
+	printf("\nUnesite ID vozila koje zelite obrisati:");
+	do {
+		if (scanf("%d", &id) != 1) {
+			printf("\nNeispravan unos. Molimo unesite broj.\n");
+			while (getchar() != '\n');
+			continue;
+		}
+		index = -1;
+		for (i = 0; i < brojVozila; i++) {
+			index++;
+			if (id == (temp + i)->redniBrUSustavu) {
+				flag = 1;
+				break;
+			}
+		}
+		if (id<0 || flag == 0) {
+			printf("\nNepostojeci id, ponovite unos:");
+
+		}
+
+	} while (id<0 || flag==0);
 
 
 	printf("Obrisati ce te ovo vozilo:\n\n");
-	ispis(temp, id);
+	ispis(temp, index);
 
 
 	printf("Jeste li sigurni?\nAko jeste unesite Y, a ako niste unesite n:");
@@ -900,34 +1019,45 @@ void brisanjeVozila() {
 			printf("\nKrivi unos, unesite Y za da ili unesite n za ne:");
 		}
 	} while (provjera != 'Y' && provjera != 'n');
-	
+
 	if (provjera == 'Y') {
 
-		fseek(fP, brojVozila, SEEK_SET);
-		
-		for (i = id + 1; i < brojVozila; i++) {
-			fread(&temp[i - 1], sizeof(VOZILO), 1, fP); 
-			fseek(fP, id * sizeof(VOZILO), SEEK_SET); 
-			fwrite(&temp[i - 1], sizeof(VOZILO), 1, fP); 
-			fseek(fP, (i * sizeof(VOZILO)), SEEK_SET); 
+		/*fseek(fP, sizeof(int), SEEK_SET);
+		fseek(fP, sizeof(VOZILO) * (index + 1), SEEK_CUR);
+		for (i = 0; i < (brojVozila-index-1); i++) {
+			fread(&temp[index+i], sizeof(VOZILO), 1, fP);
+			fseek(fP, -1 * sizeof(VOZILO), SEEK_CUR);
+			fwrite(&temp[index+i], sizeof(VOZILO), 1, fP);
+			fseek(fP, (2 * sizeof(VOZILO)), SEEK_CUR);
+		}*/
+		//fseek(fP, brojVozila, SEEK_SET);
+
+
+		VOZILO tempVozilo;
+		for (i = index + 1; i < brojVozila; i++) {
+			fseek(fP, i * sizeof(VOZILO) + sizeof(int), SEEK_SET);
+			fread(&tempVozilo, sizeof(VOZILO), 1, fP);
+			fseek(fP, (i-1) * sizeof(VOZILO) + sizeof(int), SEEK_SET);
+			fwrite(&tempVozilo, sizeof(VOZILO), 1, fP);
 		}
+
 
 		brojVozila--;
 
 		printf("Vozilo s ID-jem %d je obrisano.\n", id);
 
-		
+
 		fseek(fP, 0, SEEK_SET);
 		fwrite(&brojVozila, sizeof(int), 1, fP);
 	}
 	else if (provjera == 'n') {
 		printf("Brisanje otkazano.\n");
 	}
-	
-	
+
+
 	free(temp);
 	fclose(fP);
-	
+
 	return;
 
 }
