@@ -8,6 +8,13 @@
 #include "strukture.h"
 #include "funkcije.h"
 
+enum naredba {
+	PREGLED_VOZILA = 1,
+	UNOS_NOVOG_VOZILA,
+	AZURIRANJE_VOZILA,
+	BRISANJE_VOZILA,
+	UGASI_PROGRAM
+};
 
 int main(void) {
 
@@ -40,15 +47,15 @@ int main(void) {
 		switch (izvrsi) {
 			
 
-		case 1:pregledVozila();break;
+		case PREGLED_VOZILA:pregledVozila();break;
 
-		case 2:unosNovogVozila();break;
+		case UNOS_NOVOG_VOZILA:unosNovogVozila();break;
 
-		case 3:azuriranjeVozila(); break;
+		case AZURIRANJE_VOZILA:azuriranjeVozila(); break;
 
-		case 4:brisanjeVozila(); break;
+		case BRISANJE_VOZILA:brisanjeVozila(); break;
 
-		case 5:printf("\nProgram se ugasio.\nWOMP WOMP"); exit(EXIT_SUCCESS);
+		case UGASI_PROGRAM:printf("\nProgram se ugasio.\nWOMP WOMP"); exit(EXIT_SUCCESS);
 
 		default:printf("\nKrivi unos.\n"); break;
 		}system("pause");
