@@ -648,7 +648,7 @@ void unosNovogVozila() {
 
 	do {
 		printf("Unesite obujam motora u cm kubnim:");
-		if (scanf("%d", &temp.obujamMotora) != 1) {
+		if (scanf("%lf", &temp.obujamMotora) != 1) {
 			while (getchar() != '\n');
 			continue;
 		}
@@ -665,11 +665,11 @@ void unosNovogVozila() {
 
 	do {
 		printf("Unesite cijenu vozila u eurima:");
-		if (scanf("%d", &temp.cijena) != 1) {
+		if (scanf("%lf", &temp.cijena) != 1) {
 			while (getchar() != '\n');
 			continue;
 		}
-	} while (temp.cijena < 0 || temp.cijena >10000000);
+	} while (temp.cijena < 0 || temp.cijena > 10000000);
 
 	
 	
@@ -875,7 +875,7 @@ void azuriranjeVozila(){
 		
 		do {
 			printf("Unesite obujam motora u cm kubnim:");
-			if (scanf("%d", &(temp + index)->obujamMotora) != 1) {
+			if (scanf("%lf", &(temp + index)->obujamMotora) != 1) {
 				while (getchar() != '\n');
 				continue;
 			}
@@ -904,7 +904,7 @@ void azuriranjeVozila(){
 		
 		do {
 			printf("Unesite cijenu vozila u eurima:");
-			if (scanf("%d", &(temp + index)->cijena) != 1) {
+			if (scanf("%lf", &(temp + index)->cijena) != 1) {
 				while (getchar() != '\n');
 				continue;
 			}
