@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="datoteke.c" />
+    <ClCompile Include="UnosAzuriranjeBrisanje.c" />
     <ClCompile Include="IspisIPretraga.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>

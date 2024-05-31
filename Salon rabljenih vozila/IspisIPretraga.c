@@ -566,6 +566,7 @@ void pregledVozilaCijena() {
 			continue;
 		}
 	} while (cijenaGG <= cijenaDG || cijenaGG > 1000000);
+
 	for (i = 0; i < brojVozila; i++) {
 		if ((cijenaDG <= ((temp + i)->cijena)) && (cijenaGG >= ((temp + i)->cijena))) {
 
