@@ -1,6 +1,8 @@
 #pragma once
 
 
+extern int brojVozila;
+
 typedef struct {
 
 	
@@ -21,4 +23,27 @@ typedef struct {
 
 
 }VOZILO;
+
+
+enum naredba_dva {
+	ISPIS_SVE = 1,
+	PREGLED_MARKA,
+	PREGLED_KAROSERIJA,
+	PREGLED_GODINE,
+	PREGLED_SNAGA,
+	PREGLED_KILOMETRI,
+	PREGLED_MOTOR,
+	PREGLED_MJENJAC,
+	PREGLED_CIJENA,
+	POVRATAK_GLAVNI_IZBORNIK
+};
+
+
+enum naredba {
+	PREGLED_VOZILA = 1,
+	UNOS_NOVOG_VOZILA,
+	AZURIRANJE_VOZILA,
+	BRISANJE_VOZILA,
+	UGASI_PROGRAM
+};
 

@@ -8,13 +8,8 @@
 #include "strukture.h"
 #include "funkcije.h"
 
-enum naredba {
-	PREGLED_VOZILA = 1,
-	UNOS_NOVOG_VOZILA,
-	AZURIRANJE_VOZILA,
-	BRISANJE_VOZILA,
-	UGASI_PROGRAM
-};
+
+
 
 int main(void) {
 
