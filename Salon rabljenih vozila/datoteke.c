@@ -28,7 +28,6 @@ void sortiranjeAbecedno() {
 		exit(EXIT_FAILURE);
 	}
 
-	// Čitanje broja vozila iz prvih sizeof(int) bajtova
 	result = fread(&brojVozila, sizeof(int), 1, fP);
 	if (result != 1) {
 		perror("Greska kod citanja broja vozila");
@@ -36,7 +35,6 @@ void sortiranjeAbecedno() {
 		exit(EXIT_FAILURE);
 	}
 
-	// Alokacija memorije za čitanje svih vozila
 	vozila = (VOZILO*)malloc(brojVozila * sizeof(VOZILO));
 	if (vozila == NULL) {
 		perror("Nedovoljno memorije");
@@ -44,40 +42,35 @@ void sortiranjeAbecedno() {
 		exit(EXIT_FAILURE);
 	}
 
-	// Čitanje podataka iz datoteke
 	result = fread(vozila, sizeof(VOZILO), brojVozila, fP);
 	if (result != (size_t)brojVozila) {
-		fprintf(stderr, "Greska pri citanju podataka vozila\n");
+		perror("Greska pri citanju podataka vozila\n");
 		free(vozila);
 		fclose(fP);
 		exit(EXIT_FAILURE);
 	}
 	fclose(fP);
 
-	// Sortiranje vozila po nazivu marke vozila
 	qsort(vozila, brojVozila, sizeof(VOZILO), usporedbaMarkeZaQSort);
 
-	// Otvaranje binarne datoteke za pisanje (prepisivanje)
 	fP = fopen("vozila.bin", "wb");
 	if (fP == NULL) {
-		fprintf(stderr, "Ne mogu otvoriti datoteku za pisanje\n");
+		perror("Ne mogu otvoriti datoteku za pisanje\n");
 		free(vozila);
 		exit(EXIT_FAILURE);
 	}
 
-	// Pisanje broja vozila nazad u datoteku
 	result = fwrite(&brojVozila, sizeof(int), 1, fP);
 	if (result != 1) {
-		fprintf(stderr, "Greska pri pisanju broja vozila\n");
+		perror("Greska pri pisanju broja vozila\n");
 		free(vozila);
 		fclose(fP);
 		exit(EXIT_FAILURE);
 	}
 
-	// Pisanje sortiranih podataka nazad u datoteku
 	result = fwrite(vozila, sizeof(VOZILO), brojVozila, fP);
 	if (result != (size_t)brojVozila) {
-		fprintf(stderr, "Greska pri pisanju podataka vozila\n");
+		perror("Greska pri pisanju podataka vozila\n");
 		free(vozila);
 		fclose(fP);
 		exit(EXIT_FAILURE);
@@ -86,7 +79,7 @@ void sortiranjeAbecedno() {
 	fclose(fP);
 	free(vozila);
 
-	printf("Podaci su uspješno sortirani i upisani u datoteku.\n");
+	return;
 }
 
 void unosNovogVozila() {
@@ -216,8 +209,10 @@ void unosNovogVozila() {
 	fwrite(&brojVozila, sizeof(int), 1, fP);
 	fclose(fP);
 
-	sortiranjeAbecedno;
+	sortiranjeAbecedno();
 	
+
+	return;
 }
 
 
@@ -472,7 +467,7 @@ void azuriranjeVozila(){
 	free(old);
 	fclose(fP);
 
-	sortiranjeAbecedno;
+	sortiranjeAbecedno();
 
 	return;
 
@@ -581,7 +576,7 @@ void brisanjeVozila() {
 	free(temp);
 	fclose(fP);
 
-	sortiranjeAbecedno;
+	sortiranjeAbecedno();
 
 	return;
 
