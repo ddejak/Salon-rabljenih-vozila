@@ -15,3 +15,5 @@ void pregledVozilaSnaga();
 void pregledVozilaCijena();
 void brisanjeVozila();
 void azuriranjeVozila();
+void sortiranjeAbecedno();
+int usporedbaMarkeZaQSort(const void*, const void*);
