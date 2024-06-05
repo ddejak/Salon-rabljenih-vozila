@@ -115,6 +115,9 @@ void pregledVozilaMarka() {
 	scanf("%s", marka);
 
 	if (marka[0] == '-' && marka[1] == '-') {
+
+		free(temp);
+	    fclose(fP);
 		return;
 	}
 	for (i = 0; marka[i] != '\0'; i++) {
@@ -175,6 +178,8 @@ void pregledVozilaKaroserija() {
 	scanf("%s", karoserija);
 
 	if (karoserija[0] == '-' && karoserija[1] == '-') {
+		free(temp);
+		fclose(fP);
 		return;
 	}
 
@@ -239,6 +244,7 @@ void pregledVozilaGodine() {
 		printf("Unesite donju granicu raspon godine koju trazite:");
 		if (scanf("%d", &godinaDG) != 1) {
 			while (getchar() != '\n');
+			printf("Krivi unos\n");
 			continue;
 		}
 	} while (godinaDG < 1920 || godinaDG>2025);
@@ -246,6 +252,7 @@ void pregledVozilaGodine() {
 		printf("Unesite gornju granicu raspon godine koju trazite:");
 		if (scanf("%d", &godinaGG) != 1) {
 			while (getchar() != '\n');
+			printf("Krivi unos\n");
 			continue;
 		}
 	} while (godinaGG <= godinaDG || godinaGG > 2025);
@@ -445,6 +452,8 @@ void pregledVozilaMotor() {
 	scanf("%s", motor);
 
 	if (motor[0] == '-' && motor[1] == '-') {
+		free(temp);
+		fclose(fP);
 		return;
 	}
 	for (i = 0; motor[i] != '\0'; i++) {
@@ -506,6 +515,8 @@ void pregledVozilaMjenjac() {
 	printf("Unesite vrstu mjenjaca vozila koju zelite pronaci(ako zelite izaci unesite '--'):");
 	scanf("%s", mjenjac);
 	if (mjenjac[0] == '-' && mjenjac[1] == '-') {
+		free(temp);
+		fclose(fP);
 		return;
 	}
 
