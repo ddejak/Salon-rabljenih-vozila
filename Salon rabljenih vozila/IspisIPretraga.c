@@ -111,8 +111,12 @@ void pregledVozilaMarka() {
 	char marka[20] = { 0 };
 	int i;
 	int brojac = 0;
-	printf("Unesite marku vozila koju zelite pronaci:");
+	printf("Unesite marku vozila koju zelite pronaci(ako se zelite vratiti u izbornik unesite '--'):");
 	scanf("%s", marka);
+
+	if (marka[0] == '-' && marka[1] == '-') {
+		return;
+	}
 	for (i = 0; marka[i] != '\0'; i++) {
 		marka[i] = toupper(marka[i]);
 	}
@@ -167,8 +171,13 @@ void pregledVozilaKaroserija() {
 	char karoserija[20] = { 0 };
 	int i;
 	int brojac = 0;
-	printf("Unesite karoseriju vozila koju zelite pronaci:");
+	printf("Unesite karoseriju vozila koju zelite pronaci (ako se zelite vratiti u izbornik unesite'--'):");
 	scanf("%s", karoserija);
+
+	if (karoserija[0] == '-' && karoserija[1] == '-') {
+		return;
+	}
+
 	for (i = 0; karoserija[i] != '\0'; i++) {
 		karoserija[i] = toupper(karoserija[i]);
 	}
@@ -432,8 +441,12 @@ void pregledVozilaMotor() {
 	char motor[20] = { 0 };
 	int i;
 	int brojac = 0;
-	printf("Unesite vrstu motora vozila koju zelite pronaci:");
+	printf("Unesite vrstu motora vozila koju zelite pronaci (ako se zelite vratiti u izbornik unesite '--'):");
 	scanf("%s", motor);
+
+	if (motor[0] == '-' && motor[1] == '-') {
+		return;
+	}
 	for (i = 0; motor[i] != '\0'; i++) {
 		motor[i] = toupper(motor[i]);
 	}
@@ -490,8 +503,12 @@ void pregledVozilaMjenjac() {
 	char mjenjac[20] = { 0 };
 	int i;
 	int brojac = 0;
-	printf("Unesite vrstu mjenjaca vozila koju zelite pronaci:");
+	printf("Unesite vrstu mjenjaca vozila koju zelite pronaci(ako zelite izaci unesite '--'):");
 	scanf("%s", mjenjac);
+	if (mjenjac[0] == '-' && mjenjac[1] == '-') {
+		return;
+	}
+
 	for (i = 0; mjenjac[i] != '\0'; i++) {
 		mjenjac[i] = toupper(mjenjac[i]);
 	}

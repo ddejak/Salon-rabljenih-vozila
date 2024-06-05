@@ -1,7 +1,7 @@
 #pragma once
 #include "strukture.h"
 
-void ispis(VOZILO*, int);
+void ispis(const VOZILO* const, const int const);
 void unosNovogVozila();
 void pregledVozila();
 void ispisSvihVozila();
