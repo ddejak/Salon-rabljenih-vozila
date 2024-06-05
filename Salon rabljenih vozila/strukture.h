@@ -1,7 +1,7 @@
 #pragma once
 
 
-extern int brojVozila;
+
 
 typedef struct {
 
