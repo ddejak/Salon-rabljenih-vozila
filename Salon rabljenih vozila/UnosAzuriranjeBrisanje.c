@@ -207,7 +207,11 @@ void unosNovogVozila() {
 	rewind(fP);
 	brojVozila++;
 	fwrite(&brojVozila, sizeof(int), 1, fP);
-	fclose(fP);
+	if (fclose(fP) != 0) {
+		perror("Greska pri zatvaranju datoteke");
+		exit(EXIT_FAILURE);
+	}
+
 
 	sortiranjeAbecedno();
 	
@@ -464,8 +468,13 @@ void azuriranjeVozila(){
 	}
 
 	free(temp);
+	temp = NULL;
 	free(old);
-	fclose(fP);
+	old = NULL;
+	if (fclose(fP) != 0) {
+		perror("Greska pri zatvaranju datoteke");
+		exit(EXIT_FAILURE);
+	}
 
 	sortiranjeAbecedno();
 
@@ -574,7 +583,12 @@ void brisanjeVozila() {
 
 
 	free(temp);
-	fclose(fP);
+	temp = NULL;
+	if (fclose(fP) != 0) {
+		perror("Greska pri zatvaranju datoteke");
+		exit(EXIT_FAILURE);
+	}
+	
 
 	sortiranjeAbecedno();
 
