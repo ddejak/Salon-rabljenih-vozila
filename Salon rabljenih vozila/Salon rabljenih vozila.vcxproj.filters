@@ -18,10 +18,10 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UnosAzuriranjeBrisanje.c">
+    <ClCompile Include="unosAzuriranjeBrisanje.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IspisIPretraga.c">
+    <ClCompile Include="ispisIPretraga.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

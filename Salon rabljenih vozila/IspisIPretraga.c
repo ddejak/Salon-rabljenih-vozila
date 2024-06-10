@@ -108,14 +108,14 @@ void pregledVozilaMarka() {
 		return;
 	}
 
-	char marka[20] = { 0 };
+	char* marka = calloc(20, sizeof(char));
 	int i;
 	int brojac = 0;
 	printf("Unesite marku vozila koju zelite pronaci(ako se zelite vratiti u izbornik unesite '--'):");
 	scanf("%s", marka);
 
-	if (marka[0] == '-' && marka[1] == '-') {
-
+	if (*(marka+0) == '-' && *(marka+1) == '-') {
+		free(marka);
 		free(temp);
 	    fclose(fP);
 		return;
@@ -140,6 +140,7 @@ void pregledVozilaMarka() {
 		printf("\nVozila marke %s nemamo na stanju.\n", marka);
 	}
 
+	free(marka);
 	free(temp);
 	fclose(fP);
 
@@ -171,13 +172,14 @@ void pregledVozilaKaroserija() {
 		return;
 	}
 
-	char karoserija[20] = { 0 };
+	char* karoserija=calloc(20, sizeof(char));
 	int i;
 	int brojac = 0;
 	printf("Unesite karoseriju vozila koju zelite pronaci (ako se zelite vratiti u izbornik unesite'--'):");
 	scanf("%s", karoserija);
 
-	if (karoserija[0] == '-' && karoserija[1] == '-') {
+	if (*(karoserija+0) == '-' && *(karoserija+1) == '-') {
+		free(karoserija);
 		free(temp);
 		fclose(fP);
 		return;
@@ -202,6 +204,7 @@ void pregledVozilaKaroserija() {
 		printf("\nVozila oblika karoserije %s nemamo na stanju.\n", karoserija);
 	}
 
+	free(karoserija);
 	free(temp);
 	fclose(fP);
 
@@ -445,13 +448,14 @@ void pregledVozilaMotor() {
 		return;
 	}
 
-	char motor[20] = { 0 };
+	char* motor = calloc(20, sizeof(char));
 	int i;
 	int brojac = 0;
 	printf("Unesite vrstu motora vozila koju zelite pronaci (ako se zelite vratiti u izbornik unesite '--'):");
 	scanf("%s", motor);
 
-	if (motor[0] == '-' && motor[1] == '-') {
+	if (*(motor+0) == '-' && *(motor+1) == '-') {
+		free(motor);
 		free(temp);
 		fclose(fP);
 		return;
@@ -477,6 +481,7 @@ void pregledVozilaMotor() {
 		printf("\nVozila s motorom %s nemamo.\n", motor);
 	}
 
+	free(motor);
 	free(temp);
 	fclose(fP);
 
@@ -509,12 +514,13 @@ void pregledVozilaMjenjac() {
 		return;
 	}
 
-	char mjenjac[20] = { 0 };
+	char* mjenjac = calloc(20, sizeof(char));
 	int i;
 	int brojac = 0;
 	printf("Unesite vrstu mjenjaca vozila koju zelite pronaci(ako zelite izaci unesite '--'):");
 	scanf("%s", mjenjac);
-	if (mjenjac[0] == '-' && mjenjac[1] == '-') {
+	if (*(mjenjac+0) == '-' && *(mjenjac+1) == '-') {
+		free(mjenjac);
 		free(temp);
 		fclose(fP);
 		return;
@@ -538,6 +544,7 @@ void pregledVozilaMjenjac() {
 		printf("\nVozila s mjenjacem %s nemamo.\n", mjenjac);
 	}
 
+	free(mjenjac);
 	free(temp);
 	fclose(fP);
 

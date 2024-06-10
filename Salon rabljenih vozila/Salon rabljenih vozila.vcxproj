@@ -127,8 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="UnosAzuriranjeBrisanje.c" />
-    <ClCompile Include="IspisIPretraga.c" />
+    <ClCompile Include="unosAzuriranjeBrisanje.c" />
+    <ClCompile Include="ispisIPretraga.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
