@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 
 
 #include <stdio.h>
@@ -74,7 +74,12 @@ void ispisSvihVozila() {
 
 
 	free(temp);
-	fclose(fP);
+	temp = NULL;
+
+	if (fclose(fP) != 0) {
+		perror("Greska pri zatvaranju datoteke");
+		exit(EXIT_FAILURE);
+	}
 
 	return;
 
@@ -111,13 +116,19 @@ void pregledVozilaMarka() {
 	char* marka = calloc(20, sizeof(char));
 	int i;
 	int brojac = 0;
-	printf("Unesite marku vozila koju zelite pronaci(ako se zelite vratiti u izbornik unesite '--'):");
+	printf("Unesite marku vozila koju zelite pronaci (ili '--' za izlaz):");
 	scanf("%s", marka);
 
 	if (*(marka+0) == '-' && *(marka+1) == '-') {
 		free(marka);
+		marka = NULL;
 		free(temp);
-	    fclose(fP);
+		temp = NULL;
+
+		if (fclose(fP) != 0) {
+			perror("Greska pri zatvaranju datoteke");
+			exit(EXIT_FAILURE);
+		}
 		return;
 	}
 	for (i = 0; marka[i] != '\0'; i++) {
@@ -141,8 +152,14 @@ void pregledVozilaMarka() {
 	}
 
 	free(marka);
+	marka = NULL;
 	free(temp);
-	fclose(fP);
+	temp = NULL;
+
+	if (fclose(fP) != 0) {
+		perror("Greska pri zatvaranju datoteke");
+		exit(EXIT_FAILURE);
+	}
 
 	return;
 }
@@ -175,13 +192,19 @@ void pregledVozilaKaroserija() {
 	char* karoserija=calloc(20, sizeof(char));
 	int i;
 	int brojac = 0;
-	printf("Unesite karoseriju vozila koju zelite pronaci (ako se zelite vratiti u izbornik unesite'--'):");
+	printf("Unesite karoseriju vozila koju zelite pronaci (ili '--' za izlaz):");
 	scanf("%s", karoserija);
 
 	if (*(karoserija+0) == '-' && *(karoserija+1) == '-') {
 		free(karoserija);
+		karoserija = NULL;
 		free(temp);
-		fclose(fP);
+		temp = NULL;
+
+		if (fclose(fP) != 0) {
+			perror("Greska pri zatvaranju datoteke");
+			exit(EXIT_FAILURE);
+		}
 		return;
 	}
 
@@ -205,8 +228,14 @@ void pregledVozilaKaroserija() {
 	}
 
 	free(karoserija);
+	karoserija = NULL;
 	free(temp);
-	fclose(fP);
+	temp = NULL;
+
+	if (fclose(fP) != 0) {
+		perror("Greska pri zatvaranju datoteke");
+		exit(EXIT_FAILURE);
+	}
 
 	return;
 
@@ -243,22 +272,40 @@ void pregledVozilaGodine() {
 	int godinaGG;
 	int i;
 	int brojac = 0;
-	do {
+	while(1) {
 		printf("Unesite donju granicu raspon godine koju trazite:");
 		if (scanf("%d", &godinaDG) != 1) {
 			while (getchar() != '\n');
 			printf("Krivi unos\n");
 			continue;
 		}
-	} while (godinaDG < 1920 || godinaDG>2025);
-	do {
+		if (godinaDG < 0) {
+			free(temp);
+			temp = NULL;
+			fclose(fP);
+			return;
+		}
+		if (godinaDG > 1920 && godinaDG<=2025) {
+			break;
+		}
+	} 
+	while (1) {
 		printf("Unesite gornju granicu raspon godine koju trazite:");
 		if (scanf("%d", &godinaGG) != 1) {
 			while (getchar() != '\n');
 			printf("Krivi unos\n");
 			continue;
 		}
-	} while (godinaGG <= godinaDG || godinaGG > 2025);
+		if (godinaGG < 0) {
+			free(temp);
+			temp = NULL;
+			fclose(fP);
+			return;
+		}
+		if (godinaGG > godinaDG && godinaGG <= 2025) {
+			break;
+		}
+	} 
 
 	for (i = 0; i < brojVozila; i++) {
 		if ((godinaDG <= ((temp + i)->godinaProizvdnje)) && (godinaGG >= ((temp + i)->godinaProizvdnje))) {
@@ -276,7 +323,12 @@ void pregledVozilaGodine() {
 	}
 
 	free(temp);
-	fclose(fP);
+	temp = NULL;
+
+	if (fclose(fP) != 0) {
+		perror("Greska pri zatvaranju datoteke");
+		exit(EXIT_FAILURE);
+	}
 
 	return;
 
@@ -316,20 +368,38 @@ void pregledVozilaKilometri() {
 	int kilometrazaGG;
 	int i;
 	int brojac = 0;
-	do {
-		printf("Unesite donju granicu raspon kilometraze koji trazite:");
+	while(1){
+		printf("Unesite donju granicu raspon kilometraze koji trazite (ili negativan broj za izlaz):");
 		if (scanf("%d", &kilometrazaDG) != 1) {
 			while (getchar() != '\n');
 			continue;
 		}
-	} while (kilometrazaDG < 0 || kilometrazaDG>1000000);
-	do {
-		printf("Unesite gornju granicu raspon kilometraze koji trazite:");
+		if (kilometrazaDG < 0) {
+			free(temp);
+			temp = NULL;
+			fclose(fP);
+			return;
+		}
+		if (kilometrazaDG >= 0 && kilometrazaDG <= 1000000) {
+			break;
+		}
+	} 
+	while(1){
+		printf("Unesite gornju granicu raspon kilometraze koji trazite (ili negativan broj za izlaz):");
 		if (scanf("%d", &kilometrazaGG) != 1) {
 			while (getchar() != '\n');
 			continue;
 		}
-	} while (kilometrazaGG <= kilometrazaDG || kilometrazaGG > 1000000);
+		if (kilometrazaGG < 0) {
+			free(temp);
+			temp = NULL;
+			fclose(fP);
+			return;
+		}
+		if (kilometrazaGG > kilometrazaDG && kilometrazaGG <= 1000000) {
+			break;
+		}
+	}  
 
 	for (i = 0; i < brojVozila; i++) {
 		if ((kilometrazaDG <= ((temp + i)->kilometraza)) && (kilometrazaGG >= ((temp + i)->kilometraza))) {
@@ -347,8 +417,14 @@ void pregledVozilaKilometri() {
 		printf("\nVozila u rasponu kilometraze %d km-%d km nemamo na stanju.\n", kilometrazaDG, kilometrazaGG);
 	}
 
+	
 	free(temp);
-	fclose(fP);
+	temp = NULL;
+
+	if (fclose(fP) != 0) {
+		perror("Greska pri zatvaranju datoteke");
+		exit(EXIT_FAILURE);
+	}
 
 	return;
 
@@ -385,20 +461,38 @@ void pregledVozilaSnaga() {
 	int snagaGG;
 	int i;
 	int brojac = 0;
-	do {
-		printf("Unesite donju granicu snage motora u KW koji trazite:");
+	while(1){
+		printf("Unesite donju granicu snage motora u KW koji trazite (ili negativan broj za izlaz):");
 		if (scanf("%d", &snagaDG) != 1) {
 			while (getchar() != '\n');
 			continue;
 		}
-	} while (snagaDG < 0 || snagaDG > 2000);
-	do {
+		if (snagaDG < 0) {
+			free(temp);
+			temp = NULL;
+			fclose(fP);
+			return;
+		}
+		if (snagaDG >= 0 && snagaDG <= 2000) {
+			break;
+		}
+	}  
+	while(1){
 		printf("Unesite gornju granicu snage motora u KW  koji trazite:");
 		if (scanf("%d", &snagaGG) != 1) {
 			while (getchar() != '\n');
 			continue;
 		}
-	} while (snagaGG <= snagaDG || snagaGG > 2000);
+		if (snagaGG < 0) {
+			free(temp);
+			temp = NULL;
+			fclose(fP);
+			return;
+		}
+		if (snagaGG > snagaDG && snagaGG <= 2000) {
+			break;
+		}
+	} 
 
 	for (i = 0; i < brojVozila; i++) {
 		if ((snagaDG <= ((temp + i)->snagaMotora)) && (snagaGG >= ((temp + i)->snagaMotora))) {
@@ -416,8 +510,14 @@ void pregledVozilaSnaga() {
 		printf("\nVozila u rasponu snage %d kW-%d kW nemamo na stanju.\n", snagaDG, snagaGG);
 	}
 
+	
 	free(temp);
-	fclose(fP);
+	temp = NULL;
+
+	if (fclose(fP) != 0) {
+		perror("Greska pri zatvaranju datoteke");
+		exit(EXIT_FAILURE);
+	}
 
 	return;
 
@@ -451,13 +551,19 @@ void pregledVozilaMotor() {
 	char* motor = calloc(20, sizeof(char));
 	int i;
 	int brojac = 0;
-	printf("Unesite vrstu motora vozila koju zelite pronaci (ako se zelite vratiti u izbornik unesite '--'):");
+	printf("Unesite vrstu motora vozila koju zelite pronaci (ili '--' za izlaz):");
 	scanf("%s", motor);
 
 	if (*(motor+0) == '-' && *(motor+1) == '-') {
 		free(motor);
+		motor = NULL;
 		free(temp);
-		fclose(fP);
+		temp = NULL;
+
+		if (fclose(fP) != 0) {
+			perror("Greska pri zatvaranju datoteke");
+			exit(EXIT_FAILURE);
+		}
 		return;
 	}
 	for (i = 0; motor[i] != '\0'; i++) {
@@ -482,8 +588,14 @@ void pregledVozilaMotor() {
 	}
 
 	free(motor);
+	motor = NULL;
 	free(temp);
-	fclose(fP);
+	temp = NULL;
+
+	if (fclose(fP) != 0) {
+		perror("Greska pri zatvaranju datoteke");
+		exit(EXIT_FAILURE);
+	}
 
 	return;
 
@@ -517,12 +629,18 @@ void pregledVozilaMjenjac() {
 	char* mjenjac = calloc(20, sizeof(char));
 	int i;
 	int brojac = 0;
-	printf("Unesite vrstu mjenjaca vozila koju zelite pronaci(ako zelite izaci unesite '--'):");
+	printf("Unesite vrstu mjenjaca vozila koju zelite pronaci (ili '--' za izlaz) :");
 	scanf("%s", mjenjac);
 	if (*(mjenjac+0) == '-' && *(mjenjac+1) == '-') {
 		free(mjenjac);
+		mjenjac = NULL;
 		free(temp);
-		fclose(fP);
+		temp = NULL;
+
+		if (fclose(fP) != 0) {
+			perror("Greska pri zatvaranju datoteke");
+			exit(EXIT_FAILURE);
+		}
 		return;
 	}
 
@@ -545,8 +663,14 @@ void pregledVozilaMjenjac() {
 	}
 
 	free(mjenjac);
+	mjenjac = NULL;
 	free(temp);
-	fclose(fP);
+	temp = NULL;
+
+	if (fclose(fP) != 0) {
+		perror("Greska pri zatvaranju datoteke");
+		exit(EXIT_FAILURE);
+	}
 
 
 	return;
@@ -587,39 +711,59 @@ void pregledVozilaCijena() {
 	double cijenaGG;
 	int i;
 	int brojac = 0;
-	do {
-		printf("Unesite donju granicu raspon cijene koji trazite:");
+	while (1) {
+		printf("Unesite donju granicu raspona cijene koji trazite (ili negativan broj za izlaz): ");
 		if (scanf("%lf", &cijenaDG) != 1) {
 			while (getchar() != '\n');
 			continue;
 		}
-	} while (cijenaDG < 0 || cijenaDG >1000000);
-	do {
-		printf("Unesite gornju granicu raspon cijene koji trazite:");
+		if (cijenaDG < 0) {
+			free(temp);
+			temp = NULL;
+			fclose(fP);
+			return; 
+		}
+		if (cijenaDG >= 0 && cijenaDG <= 1000000) {
+			break;
+		}
+	}
+
+	while (1) {
+		printf("Unesite gornju granicu raspona cijene koji trazite (ili negativan broj za izlaz): ");
 		if (scanf("%lf", &cijenaGG) != 1) {
-			while (getchar() != '\n');
+			while (getchar() != '\n'); 
 			continue;
 		}
-	} while (cijenaGG <= cijenaDG || cijenaGG > 1000000);
+		if (cijenaGG < 0) {
+			free(temp);
+			temp = NULL;
+			fclose(fP);
+			return; 
+		}
+		if (cijenaGG > cijenaDG && cijenaGG <= 1000000) {
+			break;
+		}
+	}
 
-	for (i = 0; i < brojVozila; i++) {
-		if ((cijenaDG <= ((temp + i)->cijena)) && (cijenaGG >= ((temp + i)->cijena))) {
-
+	for (int i = 0; i < brojVozila; i++) {
+		if (cijenaDG <= ((temp + i)->cijena) && cijenaGG >= ((temp + i)->cijena)) {
 			printf("\n");
 			ispis(temp, i);
 			brojac++;
 		}
-
-
-
 	}
+
 
 	if (brojac == 0) {
 		printf("\nVozila u rasponu cijene %.0lf-%.0lf eura nemamo na stanju.\n", cijenaDG, cijenaGG);
 	}
 
 	free(temp);
-	fclose(fP);
+	temp = NULL;
+	if (fclose(fP) != 0) {
+		perror("Greska pri zatvaranju datoteke");
+		exit(EXIT_FAILURE);
+	}
 
 	return;
 

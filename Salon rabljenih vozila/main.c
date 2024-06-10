@@ -9,7 +9,7 @@
 #include "funkcije.h"
 
 
-extern int brojVozila;
+extern int brojVozila=0;
 
 int main(void) {
 
