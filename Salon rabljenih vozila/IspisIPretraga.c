@@ -117,7 +117,7 @@ void pregledVozilaMarka() {
 	int i;
 	int brojac = 0;
 	printf("Unesite marku vozila koju zelite pronaci (ili '--' za izlaz):");
-	scanf("%s", marka);
+	scanf(" %19[^ \n]", marka);
 
 	if (*(marka+0) == '-' && *(marka+1) == '-') {
 		free(marka);
@@ -193,7 +193,7 @@ void pregledVozilaKaroserija() {
 	int i;
 	int brojac = 0;
 	printf("Unesite karoseriju vozila koju zelite pronaci (ili '--' za izlaz):");
-	scanf("%s", karoserija);
+	scanf(" %19[^ \n]", karoserija);
 
 	if (*(karoserija+0) == '-' && *(karoserija+1) == '-') {
 		free(karoserija);
@@ -552,7 +552,7 @@ void pregledVozilaMotor() {
 	int i;
 	int brojac = 0;
 	printf("Unesite vrstu motora vozila koju zelite pronaci (ili '--' za izlaz):");
-	scanf("%s", motor);
+	scanf(" %19[^ \n]", motor);
 
 	if (*(motor+0) == '-' && *(motor+1) == '-') {
 		free(motor);
@@ -630,7 +630,7 @@ void pregledVozilaMjenjac() {
 	int i;
 	int brojac = 0;
 	printf("Unesite vrstu mjenjaca vozila koju zelite pronaci (ili '--' za izlaz) :");
-	scanf("%s", mjenjac);
+	scanf(" %19[^ \n]", mjenjac);
 	if (*(mjenjac+0) == '-' && *(mjenjac+1) == '-') {
 		free(mjenjac);
 		mjenjac = NULL;

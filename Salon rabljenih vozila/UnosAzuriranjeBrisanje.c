@@ -253,6 +253,8 @@ void azuriranjeVozila(){
 		return;
 	}
 
+	
+
 
 	VOZILO* temp = NULL;
 	VOZILO* old = NULL;
@@ -261,6 +263,15 @@ void azuriranjeVozila(){
 	fread(temp, sizeof(VOZILO), brojVozila, fP);
 	memcpy(old, temp, sizeof(VOZILO) * brojVozila);
 	printf("Broj Vozila na stanju je: %d\n", brojVozila);
+
+	printf("\nNa stanju su vozila s ovim ID-evima:");
+	for (i = 0; i < brojVozila; i++) {
+		printf("%d", (temp + i)->redniBrUSustavu);
+		if (i != (brojVozila-1)) {
+			printf(",");
+		}
+	}
+
 
 	printf("\nUnesite ID vozila koje zelite azurirati:");
 	do {
@@ -305,7 +316,7 @@ void azuriranjeVozila(){
 
 		printf("\n\nUnesite marku vozila:");
 		scanf(" %19[^\n]", (temp + index)->markaVozila);
-		for (int i = 0; (temp + index)->markaVozila[i] != '\0'; i++) {
+		for ( i = 0; (temp + index)->markaVozila[i] != '\0'; i++) {
 			(temp + index)->markaVozila[i] = toupper((temp + index)->markaVozila[i]);
 		}
 		if (strcmp((temp + index)->markaVozila, "0") == 0) {
@@ -314,7 +325,7 @@ void azuriranjeVozila(){
 		}
 		printf("Unesite model vozila:");
 		scanf(" %19[^\n]", (temp + index)->nazivModelaVozila);
-		for (int i = 0; (temp + index)->nazivModelaVozila[i] != '\0'; i++) {
+		for ( i = 0; (temp + index)->nazivModelaVozila[i] != '\0'; i++) {
 			(temp + index)->nazivModelaVozila[i] = toupper((temp + index)->nazivModelaVozila[i]);
 		}
 		if (strcmp((temp + index)->nazivModelaVozila, "0") == 0) {
@@ -323,7 +334,7 @@ void azuriranjeVozila(){
 		}
 		printf("Unesite tip karoserije vozila:");
 		scanf(" %19[^\n]", (temp + index)->karoserijaVozila);
-		for (int i = 0; (temp + index)->karoserijaVozila[i] != '\0'; i++) {
+		for ( i = 0; (temp + index)->karoserijaVozila[i] != '\0'; i++) {
 			(temp + index)->karoserijaVozila[i] = toupper((temp + index)->karoserijaVozila[i]);
 		}
 		if (strcmp((temp + index)->karoserijaVozila, "0") == 0) {
@@ -346,7 +357,7 @@ void azuriranjeVozila(){
 
 		printf("Unesite stanje vozila:");
 		scanf(" %19[^\n]", (temp + index)->stanje);
-		for (int i = 0; (temp + index)->stanje[i] != '\0'; i++) {
+		for ( i = 0; (temp + index)->stanje[i] != '\0'; i++) {
 			(temp + index)->stanje[i] = toupper((temp + index)->stanje[i]);
 		}
 		if (strcmp((temp + index)->stanje, "0") == 0) {
@@ -355,7 +366,7 @@ void azuriranjeVozila(){
 		}
 		printf("Unesite broj sasije:");
 		scanf(" %19[^\n]", (temp + index)->brojSasije);
-		for (int i = 0; (temp + index)->brojSasije[i] != '\0'; i++) {
+		for ( i = 0; (temp + index)->brojSasije[i] != '\0'; i++) {
 			(temp + index)->brojSasije[i] = toupper((temp + index)->brojSasije[i]);
 		}
 		if (strcmp((temp + index)->brojSasije, "0") == 0) {
@@ -364,7 +375,7 @@ void azuriranjeVozila(){
 		}
 		printf("Unesite vrstu motora:");
 		scanf(" %19[^\n]", (temp + index)->vrstaMotora);
-		for (int i = 0; (temp + index)->vrstaMotora[i] != '\0'; i++) {
+		for ( i = 0; (temp + index)->vrstaMotora[i] != '\0'; i++) {
 			(temp + index)->vrstaMotora[i] = toupper((temp + index)->vrstaMotora[i]);
 		}
 		if (strcmp((temp + index)->vrstaMotora, "0") == 0) {
@@ -373,7 +384,7 @@ void azuriranjeVozila(){
 		}
 		printf("Unesite vrstu mjenjaca:");
 		scanf(" %19[^\n]", (temp + index)->vrstaMjenjaca);
-		for (int i = 0; (temp + index)->vrstaMjenjaca[i] != '\0'; i++) {
+		for ( i = 0; (temp + index)->vrstaMjenjaca[i] != '\0'; i++) {
 			(temp + index)->vrstaMjenjaca[i] = toupper((temp + index)->vrstaMjenjaca[i]);
 		}
 		if (strcmp((temp + index)->vrstaMjenjaca, "0") == 0) {
@@ -484,7 +495,6 @@ void azuriranjeVozila(){
 }
 
 
-
 void brisanjeVozila() {
 	int pin;
 	int id;
@@ -522,6 +532,15 @@ void brisanjeVozila() {
 	temp = (VOZILO*)calloc(brojVozila, sizeof(VOZILO));
 	fread(temp, sizeof(VOZILO), brojVozila, fP);
 	printf("Broj Vozila na stanju je: %d\n", brojVozila);
+
+	printf("\nNa stanju su vozila s ovim ID-evima:");
+	for (i = 0; i < brojVozila; i++) {
+		printf("%d", (temp + i)->redniBrUSustavu);
+		if (i != (brojVozila - 1)) {
+			printf(",");
+		}
+	}
+
 
 	printf("\nUnesite ID vozila koje zelite obrisati:");
 	do {

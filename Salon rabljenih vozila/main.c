@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+
 #include "strukture.h"
 #include "funkcije.h"
 
