@@ -280,7 +280,7 @@ void pregledVozilaGodine() {
 		printf("Unesite donju granicu raspon godine koju trazite (ili negativan broj za izlaz):");
 		if (scanf("%d", &godinaDG) != 1) {
 			while (getchar() != '\n');
-			printf("Krivi unos (Moguci unos je 1920-2025)\n");
+			printf("Krivi unos (Moguci unos je 1920-2024)\n");
 			continue;
 		}
 		if (godinaDG < 0) {
@@ -289,15 +289,18 @@ void pregledVozilaGodine() {
 			fclose(fP);
 			return;
 		}
-		if (godinaDG > 1920 && godinaDG<=2025) {
+		if (godinaDG >= 1920 && godinaDG<2025) {
 			break;
+		}
+		else {
+			printf("Krivi unos (Moguci unos je 1920-2024)\n");
 		}
 	} 
 	while (1) {
 		printf("Unesite gornju granicu raspon godine koju trazite(ili negativan broj za izlaz):");
 		if (scanf("%d", &godinaGG) != 1) {
 			while (getchar() != '\n');
-			printf("Krivi unos (Moguci unos je 1920-2025)\n");
+			printf("Krivi unos (Moguci unos je %d-2025)\n", (godinaDG + 1));
 			continue;
 		}
 		if (godinaGG < 0) {
@@ -308,6 +311,9 @@ void pregledVozilaGodine() {
 		}
 		if (godinaGG > godinaDG && godinaGG <= 2025) {
 			break;
+		}
+		else {
+			printf("Krivi unos (Moguci unos je %d-2025)\n", (godinaDG+1));
 		}
 	} 
 
@@ -377,6 +383,7 @@ void pregledVozilaKilometri() {
 		printf("Unesite donju granicu raspon kilometraze koji trazite (ili negativan broj za izlaz):");
 		if (scanf("%d", &kilometrazaDG) != 1) {
 			while (getchar() != '\n');
+			printf("Krivi unos (Moguci unos 0-999999)\n");
 			continue;
 		}
 		if (kilometrazaDG < 0) {
@@ -385,14 +392,18 @@ void pregledVozilaKilometri() {
 			fclose(fP);
 			return;
 		}
-		if (kilometrazaDG >= 0 && kilometrazaDG <= 1000000) {
+		if (kilometrazaDG >= 0 && kilometrazaDG < 1000000) {
 			break;
+		}
+		else {
+			printf("Krivi unos (Moguci unos 0-999999)\n");
 		}
 	} 
 	while(1){
 		printf("Unesite gornju granicu raspon kilometraze koji trazite (ili negativan broj za izlaz):");
 		if (scanf("%d", &kilometrazaGG) != 1) {
 			while (getchar() != '\n');
+			printf("Krivi unos (%d-1000000)\n", (kilometrazaDG+1));
 			continue;
 		}
 		if (kilometrazaGG < 0) {
@@ -403,6 +414,10 @@ void pregledVozilaKilometri() {
 		}
 		if (kilometrazaGG > kilometrazaDG && kilometrazaGG <= 1000000) {
 			break;
+		}
+		else {
+			printf("Krivi unos (%d-1000000)\n", (kilometrazaDG + 1));
+
 		}
 	}  
 
@@ -470,6 +485,7 @@ void pregledVozilaSnaga() {
 		printf("Unesite donju granicu snage motora u KW koji trazite (ili negativan broj za izlaz):");
 		if (scanf("%d", &snagaDG) != 1) {
 			while (getchar() != '\n');
+			printf("Krivi unos (moguci unos 0-1999)\n");
 			continue;
 		}
 		if (snagaDG < 0) {
@@ -478,14 +494,19 @@ void pregledVozilaSnaga() {
 			fclose(fP);
 			return;
 		}
-		if (snagaDG >= 0 && snagaDG <= 2000) {
+		if (snagaDG >= 0 && snagaDG < 2000) {
 			break;
+		}
+		else {
+			printf("Krivi unos (moguci unos 0-1999)\n");
+
 		}
 	}  
 	while(1){
 		printf("Unesite gornju granicu snage motora u KW  koji trazite (ili negativan broj za izlaz):");
 		if (scanf("%d", &snagaGG) != 1) {
 			while (getchar() != '\n');
+			printf("Krivi unos (moguci unos %d-2000)\n", (snagaDG+1));
 			continue;
 		}
 		if (snagaGG < 0) {
@@ -496,6 +517,9 @@ void pregledVozilaSnaga() {
 		}
 		if (snagaGG > snagaDG && snagaGG <= 2000) {
 			break;
+		}
+		else {
+			printf("Krivi unos (moguci unos %d-2000)\n", (snagaDG + 1));
 		}
 	} 
 
@@ -720,6 +744,7 @@ void pregledVozilaCijena() {
 		printf("Unesite donju granicu raspona cijene koji trazite (ili negativan broj za izlaz): ");
 		if (scanf("%lf", &cijenaDG) != 1) {
 			while (getchar() != '\n');
+			printf("Krivi unos (moguci unos 0-999999)\n");
 			continue;
 		}
 		if (cijenaDG < 0) {
@@ -728,8 +753,11 @@ void pregledVozilaCijena() {
 			fclose(fP);
 			return; 
 		}
-		if (cijenaDG >= 0 && cijenaDG <= 1000000) {
+		if (cijenaDG >= 0 && cijenaDG < 1000000) {
 			break;
+		}
+		else {
+			printf("Krivi unos (moguci unos 0-999999)\n");
 		}
 	}
 
@@ -737,6 +765,7 @@ void pregledVozilaCijena() {
 		printf("Unesite gornju granicu raspona cijene koji trazite (ili negativan broj za izlaz): ");
 		if (scanf("%lf", &cijenaGG) != 1) {
 			while (getchar() != '\n'); 
+			printf("Krivi unos (moguci unos %d-1000000\n", (cijenaDG+1));
 			continue;
 		}
 		if (cijenaGG < 0) {
@@ -747,6 +776,9 @@ void pregledVozilaCijena() {
 		}
 		if (cijenaGG > cijenaDG && cijenaGG <= 1000000) {
 			break;
+		}
+		else {
+			printf("Krivi unos (moguci unos %d-1000000\n", (cijenaDG + 1));
 		}
 	}
 
