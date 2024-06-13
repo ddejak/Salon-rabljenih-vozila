@@ -744,7 +744,7 @@ void pregledVozilaCijena() {
 		printf("Unesite donju granicu raspona cijene koji trazite (ili negativan broj za izlaz): ");
 		if (scanf("%lf", &cijenaDG) != 1) {
 			while (getchar() != '\n');
-			printf("Krivi unos (moguci unos 0-999999)\n");
+			printf("Krivi unos (moguci unos 0.00-999999.00)\n");
 			continue;
 		}
 		if (cijenaDG < 0) {
@@ -757,7 +757,7 @@ void pregledVozilaCijena() {
 			break;
 		}
 		else {
-			printf("Krivi unos (moguci unos 0-999999)\n");
+			printf("Krivi unos (moguci unos 0.00-999999.00)\n");
 		}
 	}
 
@@ -765,7 +765,7 @@ void pregledVozilaCijena() {
 		printf("Unesite gornju granicu raspona cijene koji trazite (ili negativan broj za izlaz): ");
 		if (scanf("%lf", &cijenaGG) != 1) {
 			while (getchar() != '\n'); 
-			printf("Krivi unos (moguci unos %d-1000000\n", (cijenaDG+1));
+			printf("Krivi unos (moguci unos %.2lf-1000000.00)\n", (cijenaDG+1));
 			continue;
 		}
 		if (cijenaGG < 0) {
@@ -778,7 +778,7 @@ void pregledVozilaCijena() {
 			break;
 		}
 		else {
-			printf("Krivi unos (moguci unos %d-1000000\n", (cijenaDG + 1));
+			printf("Krivi unos (moguci unos %.2lf-1000000.00)\n", (cijenaDG + 1));
 		}
 	}
 
