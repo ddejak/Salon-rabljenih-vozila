@@ -12,7 +12,7 @@
 static int brojVozila = 0;
 
 
-int usporedbaMarkeZaQSort(const void* a, const void* b) {
+inline int usporedbaMarkeZaQSort(const void* a, const void* b) {
 	VOZILO* voziloA = (VOZILO*)a;
 	VOZILO* voziloB = (VOZILO*)b;
 	return strcmp(voziloA->markaVozila, voziloB->markaVozila);

@@ -11,7 +11,7 @@
 
 
 
-void ispis(VOZILO* temp, int i) {
+  void ispis(VOZILO* temp, int i) {
 
 	printf("Vozilo:%d\nID:%d\nMarka vozila:%s\nModel vozila:%s\nKaroserija vozila:%s\nGodina proizvodnje:%d\nPrijedeni kilometri:%d km\nStanje:%s\nVrsta motora:%s\nObujam motora:%.2lf cm^3\nSnaga Motora:%d kW\nVrsta mjenjaca:%s\nBroj stupnjeva mjenjaca:%d\nBroj sasije:%s\nCijena iznosi:%.2lf eura\n\n\n",
 
@@ -768,4 +768,58 @@ void pregledVozilaCijena() {
 	return;
 
 }
+
+void sigurnosnaKopija() {
+
+	FILE* fP = NULL;
+	fP = fopen("vozila.bin", "rb+");
+	if (fP == NULL) {
+		fP = fopen("vozila.bin", "wb+");
+	}
+	if (fP == NULL) {
+		perror("Greska kod sigurnosnog kopiranja.");
+		return;
+	}
+
+	FILE* sfP = NULL;
+	sfP = fopen("vozila_kopija.bin", "rb+");
+	if (sfP == NULL) {
+		sfP = fopen("vozila_kopija.bin", "wb");
+	}
+	if (sfP == NULL) {
+		perror("Greska kod sigurnosnog kopiranja");
+		return;
+	}
+
+	char buffer[1024];
+	size_t bytesRead;
+	while ((bytesRead = fread(buffer, 1, sizeof(buffer), fP)) > 0) {
+		fwrite(buffer, 1, bytesRead, sfP);
+	}
+
+	
+	fclose(fP);
+	fclose(sfP);
+
+	
+	if (remove("vozila.bin") != 0) {
+		perror("Greska pri brisanju originalne datoteke");
+		return;
+	}
+
+	
+	if (rename("vozila_kopija.bin", "vozila.bin") != 0) {
+		perror("Greska pri preimenovanju sigurnosne kopije");
+	}
+	else {
+		printf("Sigurnosna kopija je uspjesno kreirana i originalna datoteka je zamijenjena.\n");
+	}
+}
+
+
+
+
+
+
+
 

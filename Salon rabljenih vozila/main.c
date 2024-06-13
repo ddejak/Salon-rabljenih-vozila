@@ -51,7 +51,7 @@ int main(void) {
 
 		case BRISANJE_VOZILA:brisanjeVozila(); break;
 
-		case UGASI_PROGRAM:printf("\nProgram se ugasio.\nWOMP WOMP"); exit(EXIT_SUCCESS);
+		case UGASI_PROGRAM:sigurnosnaKopija(); printf("\nProgram se ugasio.\nWOMP WOMP"); exit(EXIT_SUCCESS);
 
 		default:printf("\nKrivi unos.\n"); break;
 		}system("pause");
