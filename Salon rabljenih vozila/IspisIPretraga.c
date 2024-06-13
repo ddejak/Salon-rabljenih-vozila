@@ -11,11 +11,11 @@
 
 
 
-  void ispis(VOZILO* temp, int i) {
+  void ispis(VOZILO* temp, int i, int n) {
 
 	printf("Vozilo:%d\nID:%d\nMarka vozila:%s\nModel vozila:%s\nKaroserija vozila:%s\nGodina proizvodnje:%d\nPrijedeni kilometri:%d km\nStanje:%s\nVrsta motora:%s\nObujam motora:%.2lf cm^3\nSnaga Motora:%d kW\nVrsta mjenjaca:%s\nBroj stupnjeva mjenjaca:%d\nBroj sasije:%s\nCijena iznosi:%.2lf eura\n\n\n",
 
-		i + 1,
+		 n,
 		(temp + i)->redniBrUSustavu,
 		(temp + i)->markaVozila,
 		(temp + i)->nazivModelaVozila,
@@ -66,10 +66,12 @@ void ispisSvihVozila() {
 	}
 
 	int i;
+	int brojac=0;
 
 	for (i = 0; i < brojVozila; i++)
 	{
-		ispis(temp, i);
+		brojac++;
+		ispis(temp, i, brojac);
 	}
 
 
@@ -139,8 +141,9 @@ void pregledVozilaMarka() {
 		if (strcmp(marka, (temp + i)->markaVozila) == 0) {
 
 			printf("\n");
-			ispis(temp, i);
 			brojac++;
+			ispis(temp, i, brojac);
+			
 		}
 
 
@@ -216,8 +219,9 @@ void pregledVozilaKaroserija() {
 		if (strcmp(karoserija, (temp + i)->karoserijaVozila) == 0) {
 
 			printf("\n");
-			ispis(temp, i);
 			brojac++;
+			ispis(temp, i, brojac);
+			
 		}
 
 
@@ -273,10 +277,10 @@ void pregledVozilaGodine() {
 	int i;
 	int brojac = 0;
 	while(1) {
-		printf("Unesite donju granicu raspon godine koju trazite:");
+		printf("Unesite donju granicu raspon godine koju trazite (ili negativan broj za izlaz):");
 		if (scanf("%d", &godinaDG) != 1) {
 			while (getchar() != '\n');
-			printf("Krivi unos\n");
+			printf("Krivi unos (Moguci unos je 1920-2025)\n");
 			continue;
 		}
 		if (godinaDG < 0) {
@@ -290,10 +294,10 @@ void pregledVozilaGodine() {
 		}
 	} 
 	while (1) {
-		printf("Unesite gornju granicu raspon godine koju trazite:");
+		printf("Unesite gornju granicu raspon godine koju trazite(ili negativan broj za izlaz):");
 		if (scanf("%d", &godinaGG) != 1) {
 			while (getchar() != '\n');
-			printf("Krivi unos\n");
+			printf("Krivi unos (Moguci unos je 1920-2025)\n");
 			continue;
 		}
 		if (godinaGG < 0) {
@@ -311,8 +315,9 @@ void pregledVozilaGodine() {
 		if ((godinaDG <= ((temp + i)->godinaProizvdnje)) && (godinaGG >= ((temp + i)->godinaProizvdnje))) {
 
 			printf("\n");
-			ispis(temp, i);
 			brojac++;
+			ispis(temp, i, brojac);
+			
 		}
 
 
@@ -405,8 +410,8 @@ void pregledVozilaKilometri() {
 		if ((kilometrazaDG <= ((temp + i)->kilometraza)) && (kilometrazaGG >= ((temp + i)->kilometraza))) {
 
 			printf("\n");
-			ispis(temp, i);
 			brojac++;
+			ispis(temp, i, brojac);
 		}
 
 
@@ -478,7 +483,7 @@ void pregledVozilaSnaga() {
 		}
 	}  
 	while(1){
-		printf("Unesite gornju granicu snage motora u KW  koji trazite:");
+		printf("Unesite gornju granicu snage motora u KW  koji trazite (ili negativan broj za izlaz):");
 		if (scanf("%d", &snagaGG) != 1) {
 			while (getchar() != '\n');
 			continue;
@@ -498,8 +503,8 @@ void pregledVozilaSnaga() {
 		if ((snagaDG <= ((temp + i)->snagaMotora)) && (snagaGG >= ((temp + i)->snagaMotora))) {
 
 			printf("\n");
-			ispis(temp, i);
 			brojac++;
+			ispis(temp, i, brojac);
 		}
 
 
@@ -575,8 +580,8 @@ void pregledVozilaMotor() {
 		if (strcmp(motor, (temp + i)->vrstaMotora) == 0) {
 
 			printf("\n");
-			ispis(temp, i);
 			brojac++;
+			ispis(temp, i, brojac);
 		}
 
 
@@ -652,8 +657,8 @@ void pregledVozilaMjenjac() {
 		if (strcmp(mjenjac, (temp + i)->vrstaMjenjaca) == 0) {
 
 			printf("\n");
-			ispis(temp, i);
 			brojac++;
+			ispis(temp, i, brojac);
 		}
 
 	}
@@ -748,8 +753,8 @@ void pregledVozilaCijena() {
 	for (int i = 0; i < brojVozila; i++) {
 		if (cijenaDG <= ((temp + i)->cijena) && cijenaGG >= ((temp + i)->cijena)) {
 			printf("\n");
-			ispis(temp, i);
 			brojac++;
+			ispis(temp, i, brojac);
 		}
 	}
 
@@ -782,10 +787,7 @@ void sigurnosnaKopija() {
 	}
 
 	FILE* sfP = NULL;
-	sfP = fopen("vozila_kopija.bin", "rb+");
-	if (sfP == NULL) {
-		sfP = fopen("vozila_kopija.bin", "wb");
-	}
+	sfP = fopen("vozila_kopija.bin", "wb+");
 	if (sfP == NULL) {
 		perror("Greska kod sigurnosnog kopiranja");
 		return;
@@ -815,11 +817,3 @@ void sigurnosnaKopija() {
 		printf("Sigurnosna kopija je uspjesno kreirana i originalna datoteka je zamijenjena.\n");
 	}
 }
-
-
-
-
-
-
-
-

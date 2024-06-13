@@ -297,7 +297,7 @@ void azuriranjeVozila(){
 
 
 	printf("Odabrali ste azurirati ovo vozilo:\n\n");
-	ispis(temp, index);
+	ispis(temp, index, 1);
 
 	printf("Jeste li sigurni?\nAko jeste unesite Y, a ako niste unesite n:");
 	do {
@@ -566,7 +566,7 @@ void brisanjeVozila() {
 
 
 	printf("Obrisati ce te ovo vozilo:\n\n");
-	ispis(temp, index);
+	ispis(temp, index, 1);
 
 
 	printf("Jeste li sigurni?\nAko jeste unesite Y, a ako niste unesite n:");
@@ -636,6 +636,7 @@ void pregledVozila() {
 		return;
 	}
 
+	fclose(fP);
 	while (1) {
 
 		system("cls");
