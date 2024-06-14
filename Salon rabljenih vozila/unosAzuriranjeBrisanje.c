@@ -85,6 +85,7 @@ void sortiranjeAbecedno() {
 void unosNovogVozila() {
 
 	int pin;
+	char provjera;
 	printf("Unesite administratorski pin:");
 	scanf("%d", &pin);
 	if (pin != 3009) {
@@ -92,7 +93,7 @@ void unosNovogVozila() {
 		return;
 	}
 
-	
+
 	printf("\nUnos novog vozila\n");
 
 	FILE* fP = NULL;
@@ -112,7 +113,7 @@ void unosNovogVozila() {
 	printf("Unesite marku vozila:");
 	scanf(" %19[^\n]", temp.markaVozila);
 	for (int i = 0; temp.markaVozila[i] != '\0'; i++) {
-		temp.markaVozila[i]=toupper(temp.markaVozila[i]);
+		temp.markaVozila[i] = toupper(temp.markaVozila[i]);
 	}
 
 	printf("Unesite model vozila:");
@@ -200,17 +201,31 @@ void unosNovogVozila() {
 		}
 	} while (temp.cijena < 0 || temp.cijena > 10000000);
 
-	
-	
-	fseek(fP, sizeof(int) + sizeof(VOZILO) * brojVozila, SEEK_SET);
-	fwrite(&temp, sizeof(VOZILO), 1, fP);
-	rewind(fP);
-	brojVozila++;
-	fwrite(&brojVozila, sizeof(int), 1, fP);
+	printf("Jeste li sigurni da zelite unjeti?\nAko jeste unesite Y, a ako niste unesite n:");
+	do {
+		scanf(" %c", &provjera);
+		if (provjera != 'Y' && provjera != 'n') {
+			printf("\nKrivi unos, unesite Y za da ili unesite n za ne:");
+		}
+	} while (provjera != 'Y' && provjera != 'n');
+
+
+	if (provjera == 'Y') {
+		fseek(fP, sizeof(int) + sizeof(VOZILO) * brojVozila, SEEK_SET);
+		fwrite(&temp, sizeof(VOZILO), 1, fP);
+		rewind(fP);
+		brojVozila++;
+		fwrite(&brojVozila, sizeof(int), 1, fP);
+	}
+	else if(provjera == 'n'){
+		printf("\nUnos vozila otkazan\n");
+	}
+
 	if (fclose(fP) != 0) {
 		perror("Greska pri zatvaranju datoteke");
 		exit(EXIT_FAILURE);
 	}
+	
 
 
 	sortiranjeAbecedno();
