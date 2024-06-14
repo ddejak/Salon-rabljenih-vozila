@@ -129,7 +129,7 @@ void unosNovogVozila() {
 	}
 
 	do {
-		printf("Unesite godinu proizvodnje vozila:");
+		printf("Unesite godinu proizvodnje vozila (1920-2025):");
 		if (scanf("%d", &temp.godinaProizvdnje) != 1) {
 			while (getchar() != '\n');
 			continue;
@@ -161,7 +161,7 @@ void unosNovogVozila() {
 	}
 
 	do {
-		printf("Unesite koliko stupnjeva prijenosa ima mjenjac:");
+		printf("Unesite koliko stupnjeva prijenosa ima mjenjac (3-11):");
 		if (scanf("%d", &temp.stupnjeviPrijenosa) != 1) {
 			while (getchar() != '\n');
 			continue;
@@ -169,7 +169,7 @@ void unosNovogVozila() {
 	} while (temp.stupnjeviPrijenosa < 3 || temp.stupnjeviPrijenosa>11);
 
 	do {
-		printf("Unesite kilometrazu vozila:");
+		printf("Unesite kilometrazu vozila (0-1000000):");
 		if (scanf("%d", &temp.kilometraza) != 1) {
 			while (getchar() != '\n');
 			continue;
@@ -177,7 +177,7 @@ void unosNovogVozila() {
 	} while (temp.kilometraza < 0 || temp.kilometraza>1000000);
 
 	do {
-		printf("Unesite obujam motora u cm kubnim:");
+		printf("Unesite obujam motora u cm kubnim (0-12000):");
 		if (scanf("%lf", &temp.obujamMotora) != 1) {
 			while (getchar() != '\n');
 			continue;
@@ -186,15 +186,15 @@ void unosNovogVozila() {
 	} while (temp.obujamMotora < 0 || temp.obujamMotora>12000);
 
 	do {
-		printf("Unesite snagu motora u kW:");
+		printf("Unesite snagu motora u kW (0-2000):");
 		if (scanf("%d", &temp.snagaMotora) != 1) {
 			while (getchar() != '\n');
 			continue;
 		}
-	} while (temp.snagaMotora < 0 || temp.snagaMotora>1500);
+	} while (temp.snagaMotora < 0 || temp.snagaMotora>2000);
 
 	do {
-		printf("Unesite cijenu vozila u eurima:");
+		printf("Unesite cijenu vozila u eurima (0-1000000):");
 		if (scanf("%lf", &temp.cijena) != 1) {
 			while (getchar() != '\n');
 			continue;
@@ -216,6 +216,7 @@ void unosNovogVozila() {
 		rewind(fP);
 		brojVozila++;
 		fwrite(&brojVozila, sizeof(int), 1, fP);
+		sortiranjeAbecedno();
 	}
 	else if(provjera == 'n'){
 		printf("\nUnos vozila otkazan\n");
@@ -228,7 +229,7 @@ void unosNovogVozila() {
 	
 
 
-	sortiranjeAbecedno();
+	
 	
 
 	return;
@@ -265,6 +266,7 @@ void azuriranjeVozila(){
 
 	if (brojVozila == 0) {
 		printf("Nema unesenih vozila, ne mozete koristiti funkciju azuriranje vozila.\n");
+		fclose(fP);
 		return;
 	}
 
@@ -358,7 +360,7 @@ void azuriranjeVozila(){
 		}
 
 		do {
-			printf("Unesite godinu proizvodnje vozila:");
+			printf("Unesite godinu proizvodnje vozila (1920-2025):");
 			if (scanf("%d", &(temp+index)->godinaProizvdnje) != 1) {
 				while (getchar() != '\n');
 				continue;
@@ -409,7 +411,7 @@ void azuriranjeVozila(){
 
 
 		do {
-			printf("Unesite koliko stupnjeva prijenosa ima mjenjac:");
+			printf("Unesite koliko stupnjeva prijenosa ima mjenjac (3-11):");
 			if (scanf("%d", &(temp + index)->stupnjeviPrijenosa) != 1) {
 				while (getchar() != '\n');
 				continue;
@@ -428,7 +430,7 @@ void azuriranjeVozila(){
 
 		
 		do {
-			printf("Unesite kilometrazu vozila:");
+			printf("Unesite kilometrazu vozila (0-1000000):");
 			if (scanf("%d", &(temp + index)->kilometraza) != 1) {
 				while (getchar() != '\n');
 				continue;
@@ -442,7 +444,7 @@ void azuriranjeVozila(){
 
 		
 		do {
-			printf("Unesite obujam motora u cm kubnim:");
+			printf("Unesite obujam motora u cm kubnim (0-12000):");
 			if (scanf("%lf", &(temp + index)->obujamMotora) != 1) {
 				while (getchar() != '\n');
 				continue;
@@ -457,12 +459,12 @@ void azuriranjeVozila(){
 
 		
 		do {
-			printf("Unesite snagu motora u kW:");
+			printf("Unesite snagu motora u kW (0-2000):");
 			if (scanf("%d", &(temp + index)->snagaMotora) != 1) {
 				while (getchar() != '\n');
 				continue;
 			}
-		} while ((temp + index)->snagaMotora < -1 || (temp + index)->snagaMotora>1500);
+		} while ((temp + index)->snagaMotora < -1 || (temp + index)->snagaMotora>2000);
 		if ((temp + index)->snagaMotora == 0) {
 
 			(temp + index)->snagaMotora = (old + index)->snagaMotora;
@@ -471,7 +473,7 @@ void azuriranjeVozila(){
 
 		
 		do {
-			printf("Unesite cijenu vozila u eurima:");
+			printf("Unesite cijenu vozila u eurima (0-1000000):");
 			if (scanf("%lf", &(temp + index)->cijena) != 1) {
 				while (getchar() != '\n');
 				continue;
@@ -539,6 +541,7 @@ void brisanjeVozila() {
 
 	if (brojVozila == 0) {
 		printf("Nema unesenih vozila, ne mozete koristiti funkciju brisanje vozila.\n");
+		fclose(fP);
 		return;
 	}
 
@@ -648,6 +651,7 @@ void pregledVozila() {
 
 	if (brojVozila == 0) {
 		printf("Nema unesenih vozila, kako bi mogli koristiti ovu funkciju prvo morate unjeti vozilo.\n");
+		fclose(fP);
 		return;
 	}
 
