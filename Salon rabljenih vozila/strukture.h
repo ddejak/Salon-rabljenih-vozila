@@ -14,7 +14,7 @@ typedef struct {
 	char brojSasije[20];//
 	char stanje[20];//
 	double obujamMotora;
-	double cijena;//
+	double cijena;//78
 	int godinaProizvdnje;//
 	int stupnjeviPrijenosa;//
 	int snagaMotora;//
