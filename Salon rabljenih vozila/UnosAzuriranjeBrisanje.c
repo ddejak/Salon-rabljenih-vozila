@@ -113,19 +113,22 @@ void unosNovogVozila() {
 	temp.redniBrUSustavu = brojVozila;
 	printf("Unesite marku vozila:");
 	scanf(" %19[^\n]", temp.markaVozila);
-	for ( i = 0; temp.markaVozila[i] != '\0'; i++) {
+	cistacZnakova();
+	for (i = 0; temp.markaVozila[i] != '\0'; i++) {
 		temp.markaVozila[i] = toupper(temp.markaVozila[i]);
 	}
 
 	printf("Unesite model vozila:");
 	scanf(" %19[^\n]", temp.nazivModelaVozila);
-	for ( i = 0; temp.nazivModelaVozila[i] != '\0'; i++) {
+	cistacZnakova();
+	for (i = 0; temp.nazivModelaVozila[i] != '\0'; i++) {
 		temp.nazivModelaVozila[i] = toupper(temp.nazivModelaVozila[i]);
 	}
 
 	printf("Unesite tip karoserije vozila:");
 	scanf(" %19[^\n]", temp.karoserijaVozila);
-	for ( i = 0; temp.karoserijaVozila[i] != '\0'; i++) {
+	cistacZnakova();
+	for (i = 0; temp.karoserijaVozila[i] != '\0'; i++) {
 		temp.karoserijaVozila[i] = toupper(temp.karoserijaVozila[i]);
 	}
 
@@ -139,25 +142,29 @@ void unosNovogVozila() {
 
 	printf("Unesite stanje vozila:");
 	scanf(" %19[^\n]", temp.stanje);
-	for ( i = 0; temp.stanje[i] != '\0'; i++) {
+	cistacZnakova();
+	for (i = 0; temp.stanje[i] != '\0'; i++) {
 		temp.stanje[i] = toupper(temp.stanje[i]);
 	}
 
 	printf("Unesite broj sasije:");
 	scanf(" %19[^\n]", temp.brojSasije);
-	for ( i = 0; temp.brojSasije[i] != '\0'; i++) {
+	cistacZnakova();
+	for (i = 0; temp.brojSasije[i] != '\0'; i++) {
 		temp.brojSasije[i] = toupper(temp.brojSasije[i]);
 	}
 
 	printf("Unesite vrstu motora:");
 	scanf(" %19[^\n]", temp.vrstaMotora);
-	for ( i = 0; temp.vrstaMotora[i] != '\0'; i++) {
+	cistacZnakova();
+	for (i = 0; temp.vrstaMotora[i] != '\0'; i++) {
 		temp.vrstaMotora[i] = toupper(temp.vrstaMotora[i]);
 	}
 
 	printf("Unesite vrstu mjenjaca:");
 	scanf(" %19[^\n]", temp.vrstaMjenjaca);
-	for ( i = 0; temp.vrstaMjenjaca[i] != '\0'; i++) {
+	cistacZnakova();
+	for (i = 0; temp.vrstaMjenjaca[i] != '\0'; i++) {
 		temp.vrstaMjenjaca[i] = toupper(temp.vrstaMjenjaca[i]);
 	}
 
@@ -217,9 +224,8 @@ void unosNovogVozila() {
 		rewind(fP);
 		brojVozila++;
 		fwrite(&brojVozila, sizeof(int), 1, fP);
-		sortiranjeAbecedno();
 	}
-	else if(provjera == 'n'){
+	else if (provjera == 'n') {
 		printf("\nUnos vozila otkazan\n");
 	}
 
@@ -227,11 +233,11 @@ void unosNovogVozila() {
 		perror("Greska pri zatvaranju datoteke");
 		exit(EXIT_FAILURE);
 	}
-	
 
 
-	
-	
+
+	sortiranjeAbecedno();
+
 
 	return;
 }
@@ -334,6 +340,7 @@ void azuriranjeVozila(){
 
 		printf("\n\nUnesite marku vozila:");
 		scanf(" %19[^\n]", (temp + index)->markaVozila);
+		cistacZnakova();
 		for ( i = 0; (temp + index)->markaVozila[i] != '\0'; i++) {
 			(temp + index)->markaVozila[i] = toupper((temp + index)->markaVozila[i]);
 		}
@@ -343,6 +350,7 @@ void azuriranjeVozila(){
 		}
 		printf("Unesite model vozila:");
 		scanf(" %19[^\n]", (temp + index)->nazivModelaVozila);
+		cistacZnakova();
 		for ( i = 0; (temp + index)->nazivModelaVozila[i] != '\0'; i++) {
 			(temp + index)->nazivModelaVozila[i] = toupper((temp + index)->nazivModelaVozila[i]);
 		}
@@ -352,6 +360,7 @@ void azuriranjeVozila(){
 		}
 		printf("Unesite tip karoserije vozila:");
 		scanf(" %19[^\n]", (temp + index)->karoserijaVozila);
+		cistacZnakova();
 		for ( i = 0; (temp + index)->karoserijaVozila[i] != '\0'; i++) {
 			(temp + index)->karoserijaVozila[i] = toupper((temp + index)->karoserijaVozila[i]);
 		}
@@ -375,6 +384,7 @@ void azuriranjeVozila(){
 
 		printf("Unesite stanje vozila:");
 		scanf(" %19[^\n]", (temp + index)->stanje);
+		cistacZnakova();
 		for ( i = 0; (temp + index)->stanje[i] != '\0'; i++) {
 			(temp + index)->stanje[i] = toupper((temp + index)->stanje[i]);
 		}
@@ -384,6 +394,7 @@ void azuriranjeVozila(){
 		}
 		printf("Unesite broj sasije:");
 		scanf(" %19[^\n]", (temp + index)->brojSasije);
+		cistacZnakova();
 		for ( i = 0; (temp + index)->brojSasije[i] != '\0'; i++) {
 			(temp + index)->brojSasije[i] = toupper((temp + index)->brojSasije[i]);
 		}
@@ -393,6 +404,7 @@ void azuriranjeVozila(){
 		}
 		printf("Unesite vrstu motora:");
 		scanf(" %19[^\n]", (temp + index)->vrstaMotora);
+		cistacZnakova();
 		for ( i = 0; (temp + index)->vrstaMotora[i] != '\0'; i++) {
 			(temp + index)->vrstaMotora[i] = toupper((temp + index)->vrstaMotora[i]);
 		}
@@ -402,6 +414,7 @@ void azuriranjeVozila(){
 		}
 		printf("Unesite vrstu mjenjaca:");
 		scanf(" %19[^\n]", (temp + index)->vrstaMjenjaca);
+		cistacZnakova();
 		for ( i = 0; (temp + index)->vrstaMjenjaca[i] != '\0'; i++) {
 			(temp + index)->vrstaMjenjaca[i] = toupper((temp + index)->vrstaMjenjaca[i]);
 		}

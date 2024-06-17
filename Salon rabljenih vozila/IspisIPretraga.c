@@ -849,3 +849,8 @@ void sigurnosnaKopija() {
 		printf("Sigurnosna kopija je uspjesno kreirana i originalna datoteka je zamijenjena.\n");
 	}
 }
+
+void cistacZnakova() {
+	int c;
+	while ((c = getchar()) != '\n' && c != EOF);
+}

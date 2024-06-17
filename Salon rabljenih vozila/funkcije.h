@@ -18,3 +18,4 @@ void azuriranjeVozila();
 void sortiranjeAbecedno();
 int usporedbaMarkeZaQSort(const void*, const void*);
 void sigurnosnaKopija();
+void cistacZnakova();
