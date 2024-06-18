@@ -235,9 +235,9 @@ void unosNovogVozila() {
 	}
 
 
-
+	if (brojVozila > 0) {
 	sortiranjeAbecedno();
-
+}
 
 	return;
 }
